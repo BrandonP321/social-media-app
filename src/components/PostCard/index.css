@@ -1,0 +1,76 @@
+.post-card {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.post-card > .post-content {
+    margin-top: 2px;
+}
+
+.post-card > .post-content > .post-details {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+}
+
+.post-card > .post-content > .post-details > .likes-wrapper {
+    display: flex;
+}
+
+.post-card > .post-content > .post-details > .likes-wrapper > .heart-icon {
+    font-size: 40px;
+    color: black;
+    transition: transform .5s;
+}
+
+.post-card > .post-content > .post-details > .likes-wrapper > .heart-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.post-card > .post-content > .post-details > .likes-wrapper > .heart-icon.liked {
+    color: red;
+}
+
+.post-card > .post-content > .post-details > .likes-wrapper > .likes-number {
+    margin: calc(20px - .5rem) 0 0 5px;
+}
+
+.post-card > .post-content > .post-img-wrapper {
+    width: 100%;
+    max-height: 500px;
+    border-radius: 10px;
+}
+
+.post-card > .post-content > .post-img-wrapper > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.post-card > .user-info {
+    width: 100%;
+    display: flex;
+}
+
+.post-card > .user-info > .profile-img-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.post-card > .user-info > .profile-img-wrapper > img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.post-card > .user-info > .username {
+    margin-left: 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    height: 1rem;
+}

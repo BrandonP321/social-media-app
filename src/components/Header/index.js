@@ -6,8 +6,6 @@ import { faHomeLgAlt } from '@fortawesome/pro-solid-svg-icons'
 import { faSearch } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 
-console.log(FontAwesomeIcon)
-
 export default function Header() {
     const searchInput = useRef()
     const searchInputWrapper = useRef()
