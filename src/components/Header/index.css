@@ -69,4 +69,15 @@ header .header-flex {
     font-size: 25px;
     margin-left: 20px;
     color: black;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.nav-link:focus {
+    outline: none;
 }

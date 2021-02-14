@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faHomeLgAlt } from '@fortawesome/pro-solid-svg-icons'
@@ -7,6 +7,9 @@ import { faSearch } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 
 export default function Header() {
+    let history = useHistory();
+    let location = useLocation();
+
     const searchInput = useRef()
     const searchInputWrapper = useRef()
 
@@ -15,6 +18,18 @@ export default function Header() {
     const handleSearchFormSubmit = (e) => {
         e.preventDefault()
     }  
+
+    const handleUserIconClick = () => {
+        // check for jwt in local storage, indicating user is logged in
+        const token = localStorage.getItem('token')
+        // if there is a token, send user to their profile page
+        if (token) {
+            // have server validate token
+        } else {
+            // else send user to login page
+            history.push('/login')
+        }
+    }
 
     return (
         <header>
@@ -46,9 +61,9 @@ export default function Header() {
                     <Link to='#' aria-label='messages' className='nav-link'>
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </Link>
-                    <Link to='#' aria-label='messages' className='nav-link'>
+                    <button aria-label='messages' className='nav-link' onClick={handleUserIconClick}>
                         <FontAwesomeIcon icon={faUser}/>
-                    </Link>
+                    </button>
                 </div>
             </div>
         </header>
