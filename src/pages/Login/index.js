@@ -77,7 +77,26 @@ export default function Login() {
         const allInputsFilled = checkForEmptyField({ ...loginInputValues }, setLoginHelperText)
         if (!allInputsFilled) return
 
-        setLoadingLogin(true)
+        const userObj = {
+            email: loginInputValues.email.value,
+            password: loginInputValues.password.value
+        }
+
+        API.userLogin(userObj)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(err => {
+                switch(err.response.status) {
+                    case 401:
+                        // 401 for incorrect email or password
+                        setLoginHelperText("Incorrect email or password")
+                        break
+                }
+            })
+            .finally(() => {
+                setLoadingLogin(false)
+            })
     }, [loginInputValues])
 
     const handleSignUpAttempt = useCallback((e) => {
@@ -121,8 +140,6 @@ export default function Login() {
                 console.log('done')
                 setLoadingSignUp(false)
             })
-
-        setLoadingSignUp(true)
     }, [signUpInputValues])
 
     // functiont to make sure all input fields are filled out

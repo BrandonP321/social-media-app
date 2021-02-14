@@ -8,5 +8,8 @@ export default {
     },
     createUser: function(userObj) {
         return axios.post(`${API_ENDPOINT}/api/user/create`, userObj)
+    },
+    userLogin: function(userObj) {
+        return axios.post(`${API_ENDPOINT}/api/user/login`, userObj)
     }
 }
