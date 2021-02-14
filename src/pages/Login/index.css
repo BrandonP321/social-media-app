@@ -1,0 +1,107 @@
+.login-display-change-text {
+    text-align: center;
+}
+
+.login-display-change-text span {
+    text-decoration: underline;
+    color: blue;
+}
+
+.login-display-change-text span:hover {
+    cursor: pointer;
+}
+
+.login-page-form.hide {
+    display: none;
+}
+
+.login-page-form h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.login-page-form > .form-group {
+    margin-bottom: 30px;
+}
+
+.login-page-form > .form-group > input {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    height: calc(1.5em + .75rem + 2px);
+    line-height: 1.5;
+    border: none;
+    border-radius: .25rem;
+    box-sizing: border-box;
+    background-color: #fff3eb;
+    padding-left: 10px;
+}
+
+.login-page-form > .form-group > input:focus {
+    border-color: #fbf7f4;
+    box-shadow: 0 0 0 .2rem #ffe0c9;
+}
+
+.login-page-form > .helper-wrapper {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff9595;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.login-page-form > .helper-wrapper.hide {
+    display: none;
+}
+
+.login-page-form > .submit-btn-wrapper {
+    display: flex;
+}
+
+.login-page-form > .submit-btn-wrapper > button {
+    font-size: 1rem;
+    padding: .6rem .7rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffe0c9;
+}
+
+.login-page-form > .submit-btn-wrapper > button:hover {
+    cursor: pointer;
+}
+
+.login-page-form > .submit-btn-wrapper > button:focus {
+    outline: none;
+}
+
+.login-page-form > .submit-btn-wrapper > button .load-spinner {
+    display: none;
+    animation: spin 1s linear infinite;
+}
+
+.login-page-form > .submit-btn-wrapper > button .load-spinner.show {
+    display: inline;
+}
+
+.login-page-forms-wrapper {
+    position: relative;
+    top: 50px;
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: -1px 3px 5px #00000038;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,3 +1,13 @@
+input:focus {
+  outline: none;
+}
+
+.App {
+  background: linear-gradient(45deg, #fad0c4b8, #ffd1ff8c);
+  height: 100vh;
+  box-sizing: border-box;
+}
+
 .content-header-offset {
   margin-top: 54px;
 }
