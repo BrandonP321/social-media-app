@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
+import API from '../../utils/API';
 
 export default function Login() {
     // state controls which form to display
@@ -92,6 +93,34 @@ export default function Login() {
             setSignUpHelperText("Passwords must match")
             return
         }
+
+        const userObj = {
+            email: signUpInputValues.email.value,
+            username: signUpInputValues.username.value,
+            name: signUpInputValues.name.value,
+            password: signUpInputValues.password.value
+        }
+
+        API.createUser(userObj)
+            .then(response => {
+                console.log('created new user', response.data)
+            })
+            .catch(err => {
+                switch (err.response.status) {
+                    case 409:
+                        // 409 for email taken
+                        setSignUpHelperText('Email taken')
+                        break;
+                    case 422:
+                        // 422 for username taken
+                        setSignUpHelperText("Username taken")
+                        break;
+                }
+            })
+            .finally(() => {
+                console.log('done')
+                setLoadingSignUp(false)
+            })
 
         setLoadingSignUp(true)
     }, [signUpInputValues])
