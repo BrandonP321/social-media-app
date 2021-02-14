@@ -1,5 +1,18 @@
 body {
-  background: linear-gradient(45deg, #fad0c4b8, #ffd1ff8c);
+  /* background: linear-gradient(45deg, #fad0c4b8, #ffd1ff8c); */
+  /* background: linear-gradient(to top right, #fff365bf, transparent), 
+  linear-gradient(to bottom left, #00ff00a1, transparent),
+  linear-gradient(to bottom right, #ff00ffa6, transparent),
+  linear-gradient(to top left, #ff9797, transparent); */
+  /* background:
+        linear-gradient(red, transparent),
+        linear-gradient(to top left, lime, transparent),
+        linear-gradient(to top right, blue, transparent); */
+  /* background: linear-gradient(to top left, #f1dab7, #f4d7b1, transparent),
+    linear-gradient(to top left, white, transparent),
+    linear-gradient(to bottom left, #feffdd, transparent); */
+  background-blend-mode: screen;
+  /* min-height: 100vh; */
 }
 
 input:focus {
@@ -12,6 +25,7 @@ input:focus {
   box-sizing: border-box;
 } */
 
-.content-header-offset {
+.content-header-footer-offset {
   margin-top: 54px;
+  margin-bottom: 43px;
 }

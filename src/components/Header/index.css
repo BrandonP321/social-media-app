@@ -6,6 +6,7 @@ header {
     padding: 10px 0;
     box-sizing: border-box;
     background-color: white;
+    box-shadow: 0 0 10px #00000038;
 }
 
 header h1 {
@@ -80,4 +81,28 @@ header .header-flex {
 
 .nav-link:focus {
     outline: none;
+}
+
+.nav-link.search {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .header-flex > .flex-item-group.search {
+        display: none;
+    }
+
+    .header-flex > .flex-item-group.link-icons > .nav-link.search {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    header .nav-link {
+        display: none!important;
+    }
+
+    header .nav-link.messages {
+        display: inline-block!important;
+    }
 }
