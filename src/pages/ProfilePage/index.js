@@ -104,9 +104,6 @@ export default function Profilepage() {
                                 <div className='profile-img-wrapper'>
                                     <img src={user.profileImg || 'https://i.imgur.com/dCc7ake.png'} alt='user profile picture' />
                                 </div>
-                                <div className='user-name-wrapper'>
-                                    {user.name}
-                                </div>
                             </div>
                             <div className='flex-group right'>
                                 <div className='follows-wrapper'>
@@ -131,6 +128,18 @@ export default function Profilepage() {
                             </div>
                         </div>
                         <div className='row bottom'>
+                            <div className='user-name-wrapper'>
+                                {user.name}
+                            </div>
+                            <div className='profile-option-btns-wrapper mobile'>
+                                {currentUserIsSameAsProfile ? <>
+                                    <button>Edit Profile</button>
+                                    <button>Logout</button></> :
+                                    isFollowingUser ?
+                                        <button>Unfollow</button> :
+                                        <button>Follow</button>
+                                }
+                            </div>
                             <p className='profile-bio'>{user.bio || ''}</p>
                         </div>
                     </div>
@@ -139,7 +148,7 @@ export default function Profilepage() {
                             // get column that thumbnail will show up in (add 1 to index to indicate column 1)
                             const col = getColOfThumbnail(index + 1)
                             return (
-                                <div className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col': ''}`}>
+                                <div className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col' : ''}`}>
                                     <img src={post.src} alt='thumbnail of post' />
                                 </div>
                             )
