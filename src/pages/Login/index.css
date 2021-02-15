@@ -4,7 +4,7 @@
 
 .login-display-change-text span {
     text-decoration: underline;
-    color: blue;
+    color: #138cff;
 }
 
 .login-display-change-text span:hover {
@@ -33,19 +33,24 @@
     border: none;
     border-radius: .25rem;
     box-sizing: border-box;
-    background-color: #fff3eb;
+    background-color: #292929;
+    color: white;
     padding-left: 10px;
 }
 
+.login-page-form > .form-group > input::placeholder {
+    color: rgb(167, 167, 167);
+}
+
 .login-page-form > .form-group > input:focus {
-    border-color: #fbf7f4;
-    box-shadow: 0 0 0 .2rem #ffe0c9;
+    border-color: #1b1b1b;
+    box-shadow: 0 0 0 .2rem #138cff;
 }
 
 .login-page-form > .helper-wrapper {
     width: 100%;
     padding: 20px;
-    background-color: #ff9595;
+    background-color: #ff3838;
     box-sizing: border-box;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -64,7 +69,9 @@
     padding: .6rem .7rem;
     border: none;
     border-radius: 5px;
-    background-color: #ffe0c9;
+    background-color: #138cff;
+    color: white;
+    box-shadow: inset 1px 2px 3px #ffffffa3;
 }
 
 .login-page-form > .submit-btn-wrapper > button:hover {
@@ -91,10 +98,27 @@
     max-width: 700px;
     margin: 0 auto;
     box-sizing: border-box;
-    background-color: white;
+    /* background-color: white; */
     padding: 40px;
     border-radius: 5px;
     box-shadow: -1px 3px 5px #00000038;
+}
+
+@media screen and (max-width: 550px) {
+    .login-page-form > .submit-btn-wrapper {
+        justify-content: flex-end;
+    }
+
+    .login-page-forms-wrapper {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .login-page-forms-wrapper {
+        top: 0;
+    }
 }
 
 @keyframes spin {
