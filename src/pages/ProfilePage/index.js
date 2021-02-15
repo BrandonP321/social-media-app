@@ -16,7 +16,7 @@ export default function Profilepage() {
 
     const [posts, setPosts] = useState([])
 
-    const [currentUserIsSameAsProfile, setCurrentUserIsSameAsProfile] = useState(true)
+    const [currentUserIsSameAsProfile, setCurrentUserIsSameAsProfile] = useState(false)
     const [isFollowingUser, setIsFollowingUser] = useState(false)
 
     useEffect(() => {
@@ -133,11 +133,11 @@ export default function Profilepage() {
                             </div>
                             <div className='profile-option-btns-wrapper mobile'>
                                 {currentUserIsSameAsProfile ? <>
-                                    <button>Edit Profile</button>
-                                    <button>Logout</button></> :
+                                    <button className='blue-btn'>Edit Profile</button>
+                                    <button className='blue-btn'>Logout</button></> :
                                     isFollowingUser ?
-                                        <button>Unfollow</button> :
-                                        <button>Follow</button>
+                                        <button className='blue-btn'>Unfollow</button> :
+                                        <button className='blue-btn'>Follow</button>
                                 }
                             </div>
                             <p className='profile-bio'>{user.bio || ''}</p>

@@ -195,7 +195,7 @@ export default function Login() {
                             <input id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
                         </div>
                         <div className='submit-btn-wrapper'>
-                            <button>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingLogin ? ' show' : ''}`} /></span></button>
+                            <button className='blue-btn'>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingLogin ? ' show' : ''}`} /></span></button>
                         </div>
                         <p className='login-display-change-text'>Don't have an account? <span onClick={toggleFormToDisplay}>Create an account</span></p>
                     </form>
@@ -220,7 +220,7 @@ export default function Login() {
                             <input id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
                         </div>
                         <div className='submit-btn-wrapper'>
-                            <button>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingSignUp ? ' show' : ''}`} /></span></button>
+                            <button className='blue-btn'>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingSignUp ? ' show' : ''}`} /></span></button>
                         </div>
                         <p className='login-display-change-text'>Already have an account? <span onClick={toggleFormToDisplay}>Log in</span></p>
                     </form>

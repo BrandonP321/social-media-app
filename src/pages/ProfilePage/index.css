@@ -69,9 +69,9 @@
 
 .profile-info-wrapper .profile-option-btns-wrapper button {
     width: 45%;
-    font-size: 1rem;
+    /* font-size: 1rem;
     box-sizing: border-box;
-    padding: .3rem .6rem;
+    padding: .3rem .6rem; */
 }
 
 .profile-info-wrapper .user-name-wrapper {
