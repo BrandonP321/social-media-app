@@ -1,10 +1,13 @@
 import React, { useState, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 import API from '../../utils/API';
 
 export default function Login() {
+    let history = useHistory();
+
     // state controls which form to display
     const [isLoggingIn, setIsLogginIn] = useState(false);
 
@@ -84,7 +87,14 @@ export default function Login() {
 
         API.userLogin(userObj)
             .then(response => {
-                console.log(response.data)
+                // get access token (jwt) and user id from response
+                const userId = response.data.id
+                const token = response.headers['auth-token']
+                // store token in storage
+                localStorage.setItem('accessToken', token);
+
+                // redirect user to their profile page
+                history.push(`/user/${userId}`)
             })
             .catch(err => {
                 switch(err.response.status) {
@@ -122,7 +132,14 @@ export default function Login() {
 
         API.createUser(userObj)
             .then(response => {
-                console.log('created new user', response.data)
+                // get access token (jwt) and user id from response
+                const userId = response.data.id
+                const token = response.headers['auth-token']
+                // store token in storage
+                localStorage.setItem('accessToken', token);
+
+                // redirect user to their profile page
+                history.push(`/user/${userId}`)
             })
             .catch(err => {
                 switch (err.response.status) {
@@ -137,7 +154,6 @@ export default function Login() {
                 }
             })
             .finally(() => {
-                console.log('done')
                 setLoadingSignUp(false)
             })
     }, [signUpInputValues])

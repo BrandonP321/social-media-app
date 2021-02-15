@@ -37,7 +37,7 @@ export default function Home() {
         <div className='home-page-wrapper'>
             <Header handleUserIconClick={handleUserIconClick} />
             <div className='content-header-footer-offset'>
-                <div className='feed-wrapper'>
+                <div className='content-main-responsive'>
                     <PostCard
                         user={user}
                         post={{ ...post, userHasLiked: false }}
