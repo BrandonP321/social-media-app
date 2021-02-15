@@ -11,8 +11,10 @@ body {
   /* background: linear-gradient(to top left, #f1dab7, #f4d7b1, transparent),
     linear-gradient(to top left, white, transparent),
     linear-gradient(to bottom left, #feffdd, transparent); */
-  background-blend-mode: screen;
+  /* background-blend-mode: screen; */
   /* min-height: 100vh; */
+  background-color: black;
+  color: white;
 }
 
 input:focus {

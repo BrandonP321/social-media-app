@@ -5,8 +5,9 @@ header {
     width: 100%;
     padding: 10px 0;
     box-sizing: border-box;
-    background-color: white;
-    box-shadow: 0 0 10px #00000038;
+    background-color: black;
+    /* box-shadow: 0 0 10px #00000038; */
+    border-bottom: 1px solid #1b1b1b;
     z-index: 10;
 }
 
@@ -17,7 +18,7 @@ header h1 {
 
 header .brand {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 header .header-flex {
@@ -38,7 +39,7 @@ header .header-flex {
 .header-search-wrapper:hover,
 .header-search-wrapper.focused {
     border-color: white;
-    box-shadow: 0 0 5px #b1b1b1;
+    box-shadow: 0 0 10px #b1b1b1;
 }
 
 .header-search-wrapper input {
@@ -70,7 +71,7 @@ header .header-flex {
 .nav-link {
     font-size: 25px;
     margin-left: 20px;
-    color: black;
+    color: white;
     padding: 0;
     background-color: transparent;
     border: none;
