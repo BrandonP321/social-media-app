@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 import API from '../../utils/API';
+import Header from '../../components/Header'
 
 export default function Login() {
     let history = useHistory();
@@ -97,7 +98,7 @@ export default function Login() {
                 history.push(`/user/${userId}`)
             })
             .catch(err => {
-                switch(err.response.status) {
+                switch (err.response.status) {
                     case 401:
                         // 401 for incorrect email or password
                         setLoginHelperText("Incorrect email or password")
@@ -178,50 +179,53 @@ export default function Login() {
     }
 
     return (
-        <div className='login-bg'>
-            <div className='login-page-forms-wrapper'>
-                <form className={`login-page-form${isLoggingIn ? '' : ' hide'}`} onSubmit={handleLoginAttempt}>
-                    <h2>Login</h2>
-                    <div className={`helper-wrapper${loginHelperText ? '' : ' hide'}`}>
-                        {loginHelperText}
-                    </div>
-                    <div className='form-group'>
-                        <input id='loginEmailInput' type='email' onChange={handleLoginInputChange} name='email' value={loginInputValues.email.value} placeholder='Email' aria-label='email' />
-                    </div>
-                    <div className='form-group'>
-                        <input id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
-                    </div>
-                    <div className='submit-btn-wrapper'>
-                        <button>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingLogin ? ' show' : ''}`} /></span></button>
-                    </div>
-                    <p className='login-display-change-text'>Don't have an account? <span onClick={toggleFormToDisplay}>Create an account</span></p>
-                </form>
-                <form className={`login-page-form${isLoggingIn ? ' hide' : ''}`} onSubmit={handleSignUpAttempt}>
-                    <h2>Register</h2>
-                    <div className={`helper-wrapper${signUpHelperText ? '' : ' hide'}`}>
-                        {signUpHelperText}
-                    </div>
-                    <div className='form-group'>
-                        <input id='registerEmailInput' type='email' onChange={handleSignupInputChange} name='email' value={signUpInputValues.email.value} placeholder='Email' aria-label='email' />
-                    </div>
-                    <div className='form-group'>
-                        <input id='registerUsernameInput' type='text' onChange={handleSignupInputChange} name='username' value={signUpInputValues.username.value} placeholder='Username' aria-label='username' />
-                    </div>
-                    <div className='form-group'>
-                        <input id='registerFullNameInput' type='text' onChange={handleSignupInputChange} name='name' value={signUpInputValues.name.value} placeholder='Full Name' aria-label='full name' />
-                    </div>
-                    <div className='form-group'>
-                        <input id='registerPasswordInput' type='password' onChange={handleSignupInputChange} name='password' value={signUpInputValues.password.value} placeholder='Password' aria-label='password' />
-                    </div>
-                    <div className='form-group'>
-                        <input id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
-                    </div>
-                    <div className='submit-btn-wrapper'>
-                        <button>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingSignUp ? ' show' : ''}`} /></span></button>
-                    </div>
-                    <p className='login-display-change-text'>Already have an account? <span onClick={toggleFormToDisplay}>Log in</span></p>
-                </form>
+        <>
+            <Header isLoginPage={true} />
+            <div>
+                <div className='login-page-forms-wrapper'>
+                    <form className={`login-page-form${isLoggingIn ? '' : ' hide'}`} onSubmit={handleLoginAttempt}>
+                        <h2>Login</h2>
+                        <div className={`helper-wrapper${loginHelperText ? '' : ' hide'}`}>
+                            {loginHelperText}
+                        </div>
+                        <div className='form-group'>
+                            <input id='loginEmailInput' type='email' onChange={handleLoginInputChange} name='email' value={loginInputValues.email.value} placeholder='Email' aria-label='email' />
+                        </div>
+                        <div className='form-group'>
+                            <input id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
+                        </div>
+                        <div className='submit-btn-wrapper'>
+                            <button>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingLogin ? ' show' : ''}`} /></span></button>
+                        </div>
+                        <p className='login-display-change-text'>Don't have an account? <span onClick={toggleFormToDisplay}>Create an account</span></p>
+                    </form>
+                    <form className={`login-page-form${isLoggingIn ? ' hide' : ''}`} onSubmit={handleSignUpAttempt}>
+                        <h2>Register</h2>
+                        <div className={`helper-wrapper${signUpHelperText ? '' : ' hide'}`}>
+                            {signUpHelperText}
+                        </div>
+                        <div className='form-group'>
+                            <input id='registerEmailInput' type='email' onChange={handleSignupInputChange} name='email' value={signUpInputValues.email.value} placeholder='Email' aria-label='email' />
+                        </div>
+                        <div className='form-group'>
+                            <input id='registerUsernameInput' type='text' onChange={handleSignupInputChange} name='username' value={signUpInputValues.username.value} placeholder='Username' aria-label='username' />
+                        </div>
+                        <div className='form-group'>
+                            <input id='registerFullNameInput' type='text' onChange={handleSignupInputChange} name='name' value={signUpInputValues.name.value} placeholder='Full Name' aria-label='full name' />
+                        </div>
+                        <div className='form-group'>
+                            <input id='registerPasswordInput' type='password' onChange={handleSignupInputChange} name='password' value={signUpInputValues.password.value} placeholder='Password' aria-label='password' />
+                        </div>
+                        <div className='form-group'>
+                            <input id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
+                        </div>
+                        <div className='submit-btn-wrapper'>
+                            <button>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`load-spinner${loadingSignUp ? ' show' : ''}`} /></span></button>
+                        </div>
+                        <p className='login-display-change-text'>Already have an account? <span onClick={toggleFormToDisplay}>Log in</span></p>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     )
 }

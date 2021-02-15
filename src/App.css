@@ -38,3 +38,7 @@ input:focus {
     padding-top: 10px;
     width: 95%;
 }
+
+.hide {
+  display: none;
+}

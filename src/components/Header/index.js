@@ -25,7 +25,7 @@ export default function Header(props) {
                 <div className='flex-item-group'>
                     <Link to='/' className='brand'><h1>Title</h1></Link>
                 </div>
-                <div className='flex-item-group search'>
+                <div className={`flex-item-group search${props.isLoginPage ? ' hide' : ''}`}>
                     <form ref={searchInputWrapper}
                         className={`header-search-wrapper${isFocusedOnSearch ? ' focused' : ''}`}
                         onSubmit={handleSearchFormSubmit}
@@ -42,7 +42,7 @@ export default function Header(props) {
                     </form>
                     <div className='search-results-wrapper'></div>
                 </div>
-                <div className='flex-item-group link-icons'>
+                <div className={`flex-item-group link-icons${props.isLoginPage ? ' hide' : ''}`}>
                     <Link to='#' aria-label='search' className='nav-link search'>
                         <FontAwesomeIcon icon={solidSearch} />
                     </Link>
