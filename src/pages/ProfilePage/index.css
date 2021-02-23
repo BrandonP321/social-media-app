@@ -93,6 +93,26 @@
     box-sizing: border-box;
 }
 
+.profile-posts-wrapper > .profile-post-thumb.new-post-btn svg {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    height: 50%;
+    width: 50%;
+}
+
+.profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-1 {
+    stroke-dasharray: 8.11 8.11;
+}
+
+.profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-1,
+.profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-2 {
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    stroke-width: .75px;
+}
+
 .profile-posts-wrapper > .profile-post-thumb.first-col {
     border-left: none;
 }

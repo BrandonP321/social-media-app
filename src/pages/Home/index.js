@@ -21,21 +21,11 @@ const post = {
 export default function Home() {
     let history = useHistory();
 
-    const handleUserIconClick = () => {
-        // check for jwt in local storage, indicating user is logged in
-        const token = localStorage.getItem('token')
-        // if there is a token, send user to their profile page
-        if (token) {
-            // have server validate token
-        } else {
-            // else send user to login page
-            history.push('/login')
-        }
-    }
+    
 
     return (
         <div className='home-page-wrapper'>
-            <Header handleUserIconClick={handleUserIconClick} />
+            <Header />
             <div className='content-header-footer-offset'>
                 <div className='content-main-responsive'>
                     <PostCard
@@ -72,7 +62,7 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <Footer handleUserIconClick={handleUserIconClick} />
+            <Footer />
         </div>
     )
 }

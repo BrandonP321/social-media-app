@@ -90,12 +90,13 @@ export default function Login() {
             .then(response => {
                 // get access token (jwt) and user id from response
                 const userId = response.data.id
+                const username = response.data.username
                 const token = response.headers['auth-token']
                 // store token in storage
                 localStorage.setItem('accessToken', token);
 
                 // redirect user to their profile page
-                history.push(`/user/${userId}`)
+                history.push(`/user/${username}`)
             })
             .catch(err => {
                 switch (err.response.status) {

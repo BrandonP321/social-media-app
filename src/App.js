@@ -11,13 +11,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/'>
-            {/* <Header /> */}
             <Home />
           </Route>
           <Route exact path='/login'>
             <Login />
           </Route>
-          <Route exact path='/user/:userid'>
+          <Route exact path='/user/:username'>
             <Profilepage />
           </Route>
         </Switch>

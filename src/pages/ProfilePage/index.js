@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import API from '../../utils/API'
 import './index.css'
 
 export default function Profilepage() {
+    let history = useHistory()
+
+    let { username: profilePageUsername } = useParams()
+
     const [user, setUser] = useState({
         username: '',
         name: '',
@@ -81,20 +86,34 @@ export default function Profilepage() {
         ])
     }, [])
 
+    // function to handle info from server if user is logged in
+    const handleTokenInfo = data => {
+        console.log(data)
+        const { username } = data
+        console.log(username, profilePageUsername)
+        // check if logged in user's username matches username of current profile page
+        if (username === profilePageUsername) {
+            console.log('match')
+            // update state
+            setCurrentUserIsSameAsProfile(true)
+        } else {
+            // else user is looking at another user's profile page
+        }
+    }
+
     // function to determine if a post thumbnail will show up in the 1st, 2nd, or 3rd column of displayed post thumbnails
     const getColOfThumbnail = number => {
-        // if number passed is 1, 2, or 3, return that value since it corresponds to the correct column
-        if (number === 1 || number === 2 || number === 3) {
-            return number
-        } else {
-            // else subtract 3 from the number to keep moving back 1 row until at the first row
-            return getColOfThumbnail(number - 3)
-        }
+        // if number passed is divisible by 3, that post is in the third column
+        if (number % 3 === 0) return 3
+        // if number - 2 is divisible by 3, that post is in the 2nd column
+        if ((number - 2) % 3 === 0) return 2
+        // if number - 1 is divisible by 3, that post is in the 1st column
+        if ((number - 1) % 3 === 0) return 1
     }
 
     return (
         <>
-            <Header />
+            <Header handleTokenInfo={handleTokenInfo} />
             <div className='content-header-footer-offset'>
                 <div className='content-main-responsive'>
                     <div className='profile-info-wrapper'>
@@ -118,11 +137,11 @@ export default function Profilepage() {
                                 </div>
                                 <div className='profile-option-btns-wrapper'>
                                     {currentUserIsSameAsProfile ? <>
-                                        <button>Edit Profile</button>
-                                        <button>Logout</button></> :
+                                        <button className='blue-btn'>Edit Profile</button>
+                                        <button className='blue-btn'>Logout</button></> :
                                         isFollowingUser ?
-                                            <button>Unfollow</button> :
-                                            <button>Follow</button>
+                                            <button className='blue-btn'>Unfollow</button> :
+                                            <button className='blue-btn'>Follow</button>
                                     }
                                 </div>
                             </div>
@@ -144,8 +163,14 @@ export default function Profilepage() {
                         </div>
                     </div>
                     <div className='profile-posts-wrapper'>
+                        {/* if user is viewing their own profile page, make the first post a button to create a new post */}
+                        {currentUserIsSameAsProfile ?
+                            <div className='profile-post-thumb new-post-btn'>
+                                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.75 62.75"><defs><style></style></defs><circle class="cls-1" cx="31.38" cy="31.38" r="31" /><line className="cls-2" x1="31.38" y1="20.38" x2="31.38" y2="42.37" /><line className="cls-2" x1="42.37" y1="31.38" x2="20.38" y2="31.38" /></svg>
+                            </div> :
+                            ''}
                         {posts.map((post, index) => {
-                            // get column that thumbnail will show up in (add 1 to index to indicate column 1)
+                            // get column that thumbnail will show up in (add 1 to index to start counting at 1)
                             const col = getColOfThumbnail(index + 1)
                             return (
                                 <div className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col' : ''}`}>
