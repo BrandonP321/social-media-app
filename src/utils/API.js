@@ -21,6 +21,9 @@ export default {
     createPost: function(post) {
         return axios.post(`${API_ENDPOINT}/api/post/create`, post, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
     },
+    getHomePagePosts: function() {
+        return axios.get(`${API_ENDPOINT}/api/posts/following`, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
+    },
     validateUserLoggedIn: async function() {
         // get jwt from local storage
         const token = localStorage.getItem('accessToken')

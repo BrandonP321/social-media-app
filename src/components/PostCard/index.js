@@ -30,13 +30,13 @@ export default function PostCard(props) {
         <div className='post-card'>
             <div className='user-info'>
                 <div className='profile-img-wrapper'>
-                    <img src={props.user.profileImg} alt='User profile picture' />
+                    <img src={props.user.profileImg || 'https://i.imgur.com/dCc7ake.png'} alt='User profile picture' />
                 </div>
-                <Link to='#' className='username'>{props.user.username}</Link>
+                <Link to={`/user/${props.user.username}`} className='username'>{props.user.username}</Link>
             </div>
             <div className='post-content'>
                 <div className='post-img-wrapper'>
-                    <img src={props.post.src} alt='post image' />
+                    <img src={props.post.img} alt='post image' />
                 </div>
                 <div className='post-details'>
                     <div className='likes-wrapper'>
