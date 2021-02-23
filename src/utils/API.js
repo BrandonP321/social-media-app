@@ -18,16 +18,20 @@ export default {
     userLogin: function(userObj) {
         return axios.post(`${API_ENDPOINT}/api/user/login`, userObj)
     },
+    createPost: function(post) {
+        return axios.post(`${API_ENDPOINT}/api/post/create`, post, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
+    },
     validateUserLoggedIn: async function() {
-        console.log('checking login')
         // get jwt from local storage
         const token = localStorage.getItem('accessToken')
-        console.log(token)
 
         // if no token found, return false
         if (!token) return false
 
         // make request to server to validate that token is still valid
         return axios.get(`${API_ENDPOINT}/api/auth/token`, { 'headers': { 'auth-token': token } })
+    },
+    uploadToCloudinary: function(img) {
+        return axios.post('https://api.cloudinary.com/v1_1/dka83rgpq/image/upload', { file: img, upload_preset: 'ienclaiw' })
     }
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import NewPostModal from '../../components/NewPostModal'
 import API from '../../utils/API'
 import './index.css'
 
@@ -25,57 +26,11 @@ export default function Profilepage() {
     const [currentUserIsSameAsProfile, setCurrentUserIsSameAsProfile] = useState(false)
     const [isFollowingUser, setIsFollowingUser] = useState(false)
 
+    const [showNewPostModal, setShowNewPostModal] = useState(false)
+    const [showViewPostModal, setViewPostModal] = useState(false)
+
     useEffect(() => {
-        // setPosts([
-        //     {
-        //         src: 'https://i.imgur.com/UdfqVIu.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/MG941od.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/9zZBflg.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/L82ZKnI.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/UdfqVIu.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/MG941od.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/9zZBflg.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/L82ZKnI.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/UdfqVIu.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/MG941od.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/9zZBflg.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/L82ZKnI.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/UdfqVIu.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/MG941od.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/9zZBflg.png'
-        //     },
-        //     {
-        //         src: 'https://i.imgur.com/L82ZKnI.png'
-        //     }
-        // ])
+        
     }, [])
 
     // function to handle info from server if user is logged in
@@ -86,7 +41,7 @@ export default function Profilepage() {
         API.getUser(profilePageUsername, username)
             .then(response => {
                 const userObj = response.data
-                console.log(response.data)
+
                 // update state with user info
                 setIsFollowingUser(userObj.isFollowing || false)
 
@@ -98,7 +53,6 @@ export default function Profilepage() {
                 // now that we have the user's id, get all the posts by that user
                 API.getUserPosts(userObj.id)
                     .then(response => {
-                        console.log(response.data)
                         // add posts array to state
                         setPosts(response.data)
                     })
@@ -108,10 +62,8 @@ export default function Profilepage() {
                 history.push('/')
             })            
 
-        console.log(username, profilePageUsername)
         // check if logged in user's username matches username of current profile page
         if (username === profilePageUsername) {
-            console.log('match')
             // update state
             setCurrentUserIsSameAsProfile(true)
         } else {
@@ -135,8 +87,17 @@ export default function Profilepage() {
         if ((number - 1) % 3 === 0) return 1
     }
 
+    const handleNewPostBtnClick = () => {
+        // bring up modal for creating a new post
+        setShowNewPostModal(true)
+        // hide search bar in header
+        const searchbar = document.querySelector('.header-search-wrapper')
+        searchbar.style.opacity = 0
+    }
+
     return (
         <>
+            <NewPostModal setShow={setShowNewPostModal} show={showNewPostModal}/>
             <Header handleTokenInfo={handleTokenInfo} />
             <div className='content-header-footer-offset'>
                 <div className='content-main-responsive'>
@@ -189,10 +150,10 @@ export default function Profilepage() {
                     <div className='profile-posts-wrapper'>
                         {/* if user is viewing their own profile page and they have atleast one post, make the first post a button to create a new post */}
                         {currentUserIsSameAsProfile && posts.length > 0 ?
-                            <div className='profile-post-thumb new-post-btn'>
+                            <div className='profile-post-thumb new-post-btn' onClick={handleNewPostBtnClick}>
                                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.75 62.75"><defs><style></style></defs><circle class="cls-1" cx="31.38" cy="31.38" r="31" /><line className="cls-2" x1="31.38" y1="20.38" x2="31.38" y2="42.37" /><line className="cls-2" x1="42.37" y1="31.38" x2="20.38" y2="31.38" /></svg>
                             </div> : currentUserIsSameAsProfile ? 
-                                // else if user is viewing their own page but have no posts, display btn to create first post
+                                // else if user is viewing their own page but has no posts, display btn to create first post
                                 <div></div> :
                                 ''}
                         {posts.map((post, index) => {

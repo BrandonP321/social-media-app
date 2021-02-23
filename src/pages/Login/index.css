@@ -47,19 +47,6 @@
     box-shadow: 0 0 0 .2rem #138cff;
 }
 
-.login-page-form > .helper-wrapper {
-    width: 100%;
-    padding: 20px;
-    background-color: #ff3838;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-.login-page-form > .helper-wrapper.hide {
-    display: none;
-}
-
 .login-page-form > .submit-btn-wrapper {
     display: flex;
 }
@@ -70,15 +57,6 @@
 
 .login-page-form > .submit-btn-wrapper > button:focus {
     outline: none;
-}
-
-.login-page-form > .submit-btn-wrapper > button .load-spinner {
-    display: none;
-    animation: spin 1s linear infinite;
-}
-
-.login-page-form > .submit-btn-wrapper > button .load-spinner.show {
-    display: inline;
 }
 
 .login-page-forms-wrapper {
@@ -102,14 +80,5 @@
     .login-page-forms-wrapper {
         width: 100%;
         padding: 10px;
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg)
-    }
-    to {
-        transform: rotate(360deg);
     }
 }

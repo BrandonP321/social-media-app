@@ -21,6 +21,14 @@ input:focus {
   outline: none;
 }
 
+button:disabled {
+  cursor: auto !important;
+}
+
+button:focus {
+  outline: none !important;
+}
+
 /* .App {
   background: linear-gradient(45deg, #fad0c4b8, #ffd1ff8c);
   min-height: calc(100vh - 54px);
@@ -28,14 +36,26 @@ input:focus {
 } */
 
 .blue-btn {
-  font-size: 1rem;
-  padding: .6rem .7rem;
+  background-color: #138cff;
   border: none;
   border-radius: 5px;
-  background-color: #138cff;
-  color: white;
   box-shadow: inset 1px 2px 3px #ffffffa3;
   box-sizing: border-box;
+  color: white;
+  font-size: 1rem;
+  padding: .6rem .7rem;
+}
+
+.blue-btn:focus {
+  outline: none;
+}
+
+.blue-btn:hover {
+  cursor: pointer;
+}
+
+.blue-btn:disabled {
+  background-color: #56adff;
 }
 
 .content-header-footer-offset {
@@ -50,6 +70,28 @@ input:focus {
     width: 95%;
 }
 
+.helper-wrapper {
+  background-color: #ff3838;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
 .hide {
   display: none;
+}
+
+.btn-load-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg)
+  }
+  to {
+      transform: rotate(360deg);
+  }
 }
