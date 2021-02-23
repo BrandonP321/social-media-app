@@ -93,6 +93,10 @@
     box-sizing: border-box;
 }
 
+.profile-posts-wrapper > .profile-post-thumb:hover {
+    cursor: pointer;
+}
+
 .profile-posts-wrapper > .profile-post-thumb.new-post-btn svg {
     position: absolute;
     top: 25%;
@@ -101,10 +105,12 @@
     width: 50%;
 }
 
+/* style for dashed circle of new post btn */
 .profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-1 {
     stroke-dasharray: 8.11 8.11;
 }
 
+/* styles for plus symbol of new post btn */
 .profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-1,
 .profile-posts-wrapper > .profile-post-thumb.new-post-btn svg .cls-2 {
     fill: none;
@@ -165,5 +171,14 @@
 
     .profile-info-wrapper .profile-bio {
         margin-top: 10px;
+    }
+}
+
+@keyframes newPostSpinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

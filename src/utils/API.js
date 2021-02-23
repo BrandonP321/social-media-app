@@ -6,6 +6,12 @@ export default {
     updatePostLikeStatus: function(postId, userLikedPost) {
         return axios.put(`${API_ENDPOINT}/api/post/status/likes`, { id: postId, userLikedPost: userLikedPost })
     },
+    getUser: function(profilePageUsername, visitingUser) {
+        return axios.get(`${API_ENDPOINT}/api/user/${profilePageUsername}`, { visitingUser: visitingUser })
+    },
+    getUserPosts: function(id) {
+        return axios.get(`${API_ENDPOINT}/api/user/${id}/posts`)
+    },
     createUser: function(userObj) {
         return axios.post(`${API_ENDPOINT}/api/user/create`, userObj)
     },
