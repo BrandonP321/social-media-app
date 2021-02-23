@@ -95,6 +95,14 @@ export default function Profilepage() {
         searchbar.style.opacity = 0
     }
 
+    const logout = () => {
+        // remove token from local storage
+        localStorage.removeItem('accessToken')
+
+        // send user to login page
+        history.push('/login')
+    }
+
     return (
         <>
             <NewPostModal setShow={setShowNewPostModal} show={showNewPostModal}/>
@@ -123,7 +131,7 @@ export default function Profilepage() {
                                 <div className='profile-option-btns-wrapper'>
                                     {currentUserIsSameAsProfile ? <>
                                         <button className='blue-btn'>Edit Profile</button>
-                                        <button className='blue-btn'>Logout</button></> :
+                                        <button className='blue-btn' onClick={logout}>Logout</button></> :
                                         isFollowingUser ?
                                             <button className='blue-btn'>Unfollow</button> :
                                             <button className='blue-btn'>Follow</button>
