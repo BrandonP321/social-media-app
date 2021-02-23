@@ -1,7 +1,7 @@
 .new-post-modal-wrapper-inner {
     position: relative;
     margin: 0 auto;
-    width: 90%;
+    width: 95%;
     max-width: 500px;
     padding: 10px;
     background-color: black;
@@ -166,4 +166,10 @@
 .new-post-modal-wrapper-inner > .post-btn-wrapper {
     display: flex;
     justify-content: flex-end;    
-}  
+}
+
+@media screen and (max-width: 800px) {
+    .new-post-modal-wrapper-outer {
+        padding-top: 5px;
+    }
+}
