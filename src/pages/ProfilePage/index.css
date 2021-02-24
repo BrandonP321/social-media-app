@@ -85,6 +85,12 @@
     width: 100%;
 }
 
+.profile-posts-wrapper .first-post-btn,
+.profile-posts-wrapper .no-posts-display {
+    font-size: 2rem;
+    margin: 0 auto;
+}
+
 .profile-posts-wrapper > .profile-post-thumb {
     position: relative;
     width: 33.333%;

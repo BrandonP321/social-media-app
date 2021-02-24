@@ -162,8 +162,15 @@ export default function Profilepage() {
                                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.75 62.75"><defs><style></style></defs><circle class="cls-1" cx="31.38" cy="31.38" r="31" /><line className="cls-2" x1="31.38" y1="20.38" x2="31.38" y2="42.37" /><line className="cls-2" x1="42.37" y1="31.38" x2="20.38" y2="31.38" /></svg>
                             </div> : currentUserIsSameAsProfile ? 
                                 // else if user is viewing their own page but has no posts, display btn to create first post
-                                <div></div> :
-                                ''}
+                                <button 
+                                    className='first-post-btn dark-btn'
+                                    onClick={handleNewPostBtnClick}>
+                                    Create Your First Post
+                                </button> :
+                                // else user is viewing another's page but user has no posts
+                                <div className='no-posts-display'>
+                                    User has not posted yet
+                                </div>}
                         {posts.map((post, index) => {
                             // get column that thumbnail will show up in (add 1 to index to start counting at 1)
                             const col = getColOfThumbnail(index + 1)
