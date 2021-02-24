@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import API from '../../utils/API'
@@ -23,6 +25,10 @@ export default function EditProfile() {
         bio: '',
         profilePicture: ''
     })
+
+    const userHasChangedProfilePic = useRef(false)
+
+    const [isUpdating, setIsUpdating] = useState(false)
 
     useEffect(() => {
         console.log(username)
@@ -63,6 +69,9 @@ export default function EditProfile() {
 
         // read image
         reader.readAsDataURL(selectedFile)
+
+        // update ref to show user has changed their profile picture
+        userHasChangedProfilePic.current = true
     }
 
     const handleFormSubmit = useCallback(e => {
@@ -77,23 +86,32 @@ export default function EditProfile() {
             return setHelperText("Username can not be blank")
         }
 
-        // upload image to cloudinary
-        API.uploadProfilePic(user.profilePicture).
-            then(response => {
-                console.log(response.data)
-                // send user data to db
-                updateUserDB(response.data.url)
-            }).
-            catch(err => {
-                console.log(err.response)
-                alert("An error occurred while uploading profile picture")
-            })
+        setIsUpdating(true)
+
+        // if user has updated their profile pic, upload the new image to cloudinary
+        if (userHasChangedProfilePic.current) {
+            // upload image to cloudinary
+            API.uploadProfilePic(user.profilePicture).
+                then(response => {
+                    console.log(response.data)
+                    // send user data to db
+                    updateUserDB(response.data.url)
+                }).
+                catch(err => {
+                    console.log(err.response)
+                    alert("An error occurred while uploading profile picture")
+                    setIsUpdating(false)
+                })
+        } else {
+            // else user didn't change their profile pic
+            updateUserDB(null)
+        }
     }, [user])
 
     // function to make API request to update user data in DB
     const updateUserDB = (img) => {
         // send user info to server
-        API.userUpdate({ ...user, profilePicture: img }).
+        API.userUpdate({ ...user, profilePicture: img || user.profilePicture }).
             then(response => {
                 console.log(response.data)
                 // store new token in local storage
@@ -120,6 +138,9 @@ export default function EditProfile() {
                             break;
                     }
                 }
+            }).
+            finally(() => {
+                setIsUpdating(false)
             })
     }
 
@@ -136,7 +157,10 @@ export default function EditProfile() {
                         <div className='img-wrapper'>
                             <img src={user.profilePicture || 'https://i.imgur.com/dCc7ake.png'} alt='profile picture' />
                         </div>
-                        <button className='dark-btn' onClick={handleChangeImgBtnClick}>Change Image</button>
+                        <button 
+                            className='dark-btn' 
+                            onClick={handleChangeImgBtnClick}
+                            disabled={isUpdating}>Change Image</button>
                         {/* hidden input for getting image from computer */}
                         <input ref={fileInputEle} className='hide' type='file' onChange={handleImgChange} />
                     </div>
@@ -168,7 +192,14 @@ export default function EditProfile() {
                         value={user.email}
                         onChange={handleInputChange} />
                     <div className='btn-wrapper'>
-                        <button className='blue-btn' onClick={handleFormSubmit}>Save Changes</button>
+                        <button
+                            className='blue-btn'
+                            onClick={handleFormSubmit}
+                            disabled={isUpdating}>
+                            Save Changes <FontAwesomeIcon 
+                                            icon={faSpinnerThird} 
+                                            className={`btn-load-spinner${isUpdating ? '' : ' hide'}`}/>
+                        </button>
                     </div>
                 </form>
             </div>
