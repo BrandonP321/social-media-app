@@ -191,6 +191,16 @@ export default function EditProfile() {
                         name='email'
                         value={user.email}
                         onChange={handleInputChange} />
+                    <label for='edit-profile-bio'>Bio</label>
+                    <textarea 
+                        id='edit-profile-bio'
+                        className='dark-input'
+                        name='bio'
+                        value={user.bio}
+                        placeholder='Bio'
+                        maxLength='300'
+                        onChange={handleInputChange}></textarea>
+                    <small>{user.bio ? user.bio.length : 0}/300</small>
                     <div className='btn-wrapper'>
                         <button
                             className='blue-btn'

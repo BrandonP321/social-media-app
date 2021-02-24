@@ -21,6 +21,13 @@
     margin-bottom: 5px;
 }
 
+.edit-profile-form > textarea {
+    min-height: 125px;
+    max-height: 125px;
+    max-width: 100%;
+    min-width: 100%;
+}
+
 .edit-profile-form > .btn-wrapper {
     display: flex;
     justify-content: flex-end;

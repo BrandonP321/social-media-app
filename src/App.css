@@ -89,6 +89,7 @@ button:focus {
 .dark-input {
   display: block;
   width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   height: calc(1.5em + .75rem + 2px);
   line-height: 1.5;
@@ -103,6 +104,7 @@ button:focus {
 .dark-input:focus {
   border-color: #1b1b1b;
   box-shadow: 0 0 0 .2rem #138cff;
+  outline: none;
 }
 
 .dark-input::placeholder {
