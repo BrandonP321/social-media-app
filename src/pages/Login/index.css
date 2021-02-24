@@ -24,39 +24,8 @@
     margin-bottom: 30px;
 }
 
-.login-page-form > .form-group > input {
-    display: block;
-    width: 100%;
-    font-size: 1rem;
-    height: calc(1.5em + .75rem + 2px);
-    line-height: 1.5;
-    border: none;
-    border-radius: .25rem;
-    box-sizing: border-box;
-    background-color: #292929;
-    color: white;
-    padding-left: 10px;
-}
-
-.login-page-form > .form-group > input::placeholder {
-    color: rgb(167, 167, 167);
-}
-
-.login-page-form > .form-group > input:focus {
-    border-color: #1b1b1b;
-    box-shadow: 0 0 0 .2rem #138cff;
-}
-
 .login-page-form > .submit-btn-wrapper {
     display: flex;
-}
-
-.login-page-form > .submit-btn-wrapper > button:hover {
-    cursor: pointer;
-}
-
-.login-page-form > .submit-btn-wrapper > button:focus {
-    outline: none;
 }
 
 .login-page-forms-wrapper {

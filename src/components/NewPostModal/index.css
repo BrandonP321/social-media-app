@@ -144,19 +144,19 @@
 }
 
 .new-post-modal-wrapper-inner .img-wrapper > .btn-wrapper > button {
-    font-size: 1rem;
+    /* font-size: 1rem;
     padding: .4rem .6rem;
     background-color: transparent;
     color: #9c9c9c;
     border: 2px solid #424242;
     border-radius: 5px;
-    transition: all .2s;
+    transition: all .2s; */
 }
 
 .new-post-modal-wrapper-inner .img-wrapper > .btn-wrapper > button:hover {
-    cursor: pointer;
+    /* cursor: pointer;
     background-color: #424242;
-    color: white;
+    color: white; */
 }
 
 .new-post-modal-wrapper-inner .img-wrapper > .image-upload-svg-wrapper {

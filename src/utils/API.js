@@ -18,6 +18,9 @@ export default {
     userLogin: function(userObj) {
         return axios.post(`${API_ENDPOINT}/api/user/login`, userObj)
     },
+    userUpdate: function(user) {
+        return axios.put(`${API_ENDPOINT}/api/user/update`, user, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
+    },
     createPost: function(post) {
         return axios.post(`${API_ENDPOINT}/api/post/create`, post, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
     },
@@ -36,5 +39,8 @@ export default {
     },
     uploadToCloudinary: function(img) {
         return axios.post('https://api.cloudinary.com/v1_1/dka83rgpq/image/upload', { file: img, upload_preset: 'ienclaiw' })
+    },
+    uploadProfilePic: function(img) {
+        return axios.post('https://api.cloudinary.com/v1_1/dka83rgpq/image/upload', { file: img, upload_preset: 'social-profile' })
     }
 }

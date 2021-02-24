@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import Login from './pages/Login';
 import Profilepage from './pages/ProfilePage';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route exact path='/user/:username'>
             <Profilepage />
+          </Route>
+          <Route exact path='/user/edit/:username'>
+            <EditProfile />
           </Route>
         </Switch>
       </Router>

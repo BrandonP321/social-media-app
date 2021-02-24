@@ -66,10 +66,11 @@ export default function Header(props) {
                         <input ref={searchInput}
                             className='search-bar'
                             placeholder='search'
+                            aria-label='search bar'
                             onFocus={() => setIsFocusedOnSearch(true)}
                             onBlur={() => setIsFocusedOnSearch(false)}
                         />
-                        <button className='search-icon-btn'>
+                        <button className='search-icon-btn' aria-label='search'>
                             <FontAwesomeIcon icon={faSearch} />
                         </button>
                     </form>

@@ -190,10 +190,10 @@ export default function Login() {
                             {loginHelperText}
                         </div>
                         <div className='form-group'>
-                            <input id='loginEmailInput' type='email' onChange={handleLoginInputChange} name='email' value={loginInputValues.email.value} placeholder='Email' aria-label='email' />
+                            <input className='dark-input' id='loginEmailInput' type='email' onChange={handleLoginInputChange} name='email' value={loginInputValues.email.value} placeholder='Email' aria-label='email' />
                         </div>
                         <div className='form-group'>
-                            <input id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
+                            <input className='dark-input' id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
                         </div>
                         <div className='submit-btn-wrapper'>
                             <button className='blue-btn'>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingLogin ? '' : ' hide'}`} /></span></button>
@@ -206,19 +206,19 @@ export default function Login() {
                             {signUpHelperText}
                         </div>
                         <div className='form-group'>
-                            <input id='registerEmailInput' type='email' onChange={handleSignupInputChange} name='email' value={signUpInputValues.email.value} placeholder='Email' aria-label='email' />
+                            <input className='dark-input' id='registerEmailInput' type='email' onChange={handleSignupInputChange} name='email' value={signUpInputValues.email.value} placeholder='Email' aria-label='email' />
                         </div>
                         <div className='form-group'>
-                            <input id='registerUsernameInput' type='text' onChange={handleSignupInputChange} name='username' value={signUpInputValues.username.value} placeholder='Username' aria-label='username' />
+                            <input className='dark-input' id='registerUsernameInput' type='text' onChange={handleSignupInputChange} name='username' value={signUpInputValues.username.value} placeholder='Username' aria-label='username' />
                         </div>
                         <div className='form-group'>
-                            <input id='registerFullNameInput' type='text' onChange={handleSignupInputChange} name='name' value={signUpInputValues.name.value} placeholder='Full Name' aria-label='full name' />
+                            <input className='dark-input' id='registerFullNameInput' type='text' onChange={handleSignupInputChange} name='name' value={signUpInputValues.name.value} placeholder='Full Name' aria-label='full name' />
                         </div>
                         <div className='form-group'>
-                            <input id='registerPasswordInput' type='password' onChange={handleSignupInputChange} name='password' value={signUpInputValues.password.value} placeholder='Password' aria-label='password' />
+                            <input className='dark-input' id='registerPasswordInput' type='password' onChange={handleSignupInputChange} name='password' value={signUpInputValues.password.value} placeholder='Password' aria-label='password' />
                         </div>
                         <div className='form-group'>
-                            <input id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
+                            <input className='dark-input' id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
                         </div>
                         <div className='submit-btn-wrapper'>
                             <button className='blue-btn'>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingSignUp ? '' : ' hide'}`} /></span></button>

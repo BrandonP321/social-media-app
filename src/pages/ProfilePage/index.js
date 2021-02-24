@@ -1,6 +1,6 @@
 import { faGameConsoleHandheld } from '@fortawesome/pro-solid-svg-icons'
 import React, { useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useParams, Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import NewPostModal from '../../components/NewPostModal'
@@ -130,7 +130,7 @@ export default function Profilepage() {
                                 </div>
                                 <div className='profile-option-btns-wrapper'>
                                     {currentUserIsSameAsProfile ? <>
-                                        <button className='blue-btn'>Edit Profile</button>
+                                        <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
                                         <button className='blue-btn' onClick={logout}>Logout</button></> :
                                         isFollowingUser ?
                                             <button className='blue-btn'>Unfollow</button> :
@@ -145,8 +145,8 @@ export default function Profilepage() {
                             </div>
                             <div className='profile-option-btns-wrapper mobile'>
                                 {currentUserIsSameAsProfile ? <>
-                                    <button className='blue-btn'>Edit Profile</button>
-                                    <button className='blue-btn'>Logout</button></> :
+                                    <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
+                                    <button className='blue-btn' onClick={logout}>Logout</button></> :
                                     isFollowingUser ?
                                         <button className='blue-btn'>Unfollow</button> :
                                         <button className='blue-btn'>Follow</button>

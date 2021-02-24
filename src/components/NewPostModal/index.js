@@ -99,7 +99,7 @@ export default function NewPostModal(props) {
                                 <>
                                     <img src={imgToPost} alt='Image to post' />
                                     <div className='btn-wrapper'>
-                                        <button onClick={() => fileInput.current.click()}>Change Image</button>
+                                        <button className='dark-btn' onClick={() => fileInput.current.click()}>Change Image</button>
                                     </div>
                                 </> :
                                 <>
