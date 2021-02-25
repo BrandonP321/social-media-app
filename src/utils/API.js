@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Header from '../components/Header'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000'
 
@@ -42,5 +43,25 @@ export default {
     },
     uploadProfilePic: function(img) {
         return axios.post('https://api.cloudinary.com/v1_1/dka83rgpq/image/upload', { file: img, upload_preset: 'social-profile' })
+    },
+    likePost: function(postId) {
+        return axios.put(`${API_ENDPOINT}/api/post/${postId}/like`, null, setHeaderToken())
+    },
+    unlikePost: function(postId) {
+        return axios.put(`${API_ENDPOINT}/api/post/${postId}/unlike`, null, setHeaderToken())
     }
+}
+
+// function that returns obj for header in server request with jwt
+function setHeaderToken() {
+    // get token from storage
+    const token = localStorage.getItem('accessToken')
+
+    const headerObj = {
+        'headers': {
+            'auth-token': token
+        }
+    }
+
+    return headerObj
 }

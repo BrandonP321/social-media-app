@@ -6,19 +6,6 @@ import PostCard from '../../components/PostCard'
 import API from '../../utils/API'
 import './index.css'
 
-const user = {
-    profileImg: 'https://i.imgur.com/JYvi5tN.png',
-    username: 'brandonp321'
-}
-
-const post = {
-    src: 'https://i.imgur.com/UdfqVIu.png',
-    caption: 'This is my first post',
-    likes: 15,
-    userHasLiked: true,
-    creationDate: Date.now()
-}
-
 export default function Home() {
     let history = useHistory();
 
@@ -28,12 +15,21 @@ export default function Home() {
         // get all recent posts of people the user followers
         API.getHomePagePosts()
             .then(response => {
-                console.log(response)
+                // iterate over array of posts
+                for (let post of response.data.posts) {
+                    // if user has liked the post, set hasLiked to true
+                    if (post.likedBy.includes(response.data.user.id)) {
+                        post.hasLiked = true
+                    } else {
+                        // set hasLiked to false
+                        post.hasLiked = false
+                    }
+                }
                 // set array of posts to state
-                setPosts(response.data)
+                setPosts(response.data.posts)
             })
             .catch(err => {
-                console.log(err.response)
+                console.log(err)
             })
     }, [])
 
