@@ -41,6 +41,7 @@ export default function PostCard(props) {
                             case 401:
                             case 403:
                                 // token was no longer valid, send user to login page
+                                alert('Your session has timed out')
                                 history.push('/login')
                                 break
                         }
@@ -68,6 +69,7 @@ export default function PostCard(props) {
                             case 401:
                             case 403:
                                 // token was no longer valid, send user to login page
+                                alert("Your session has timed out")
                                 history.push('/login')
                                 break
                         }
@@ -84,7 +86,7 @@ export default function PostCard(props) {
         <div className='post-card'>
             <div className='user-info'>
                 <div className='profile-img-wrapper'>
-                    <img src={props.user.profileImg || 'https://i.imgur.com/dCc7ake.png'} alt='User profile picture' />
+                    <img src={props.user.profilePicture || 'https://i.imgur.com/dCc7ake.png'} alt='User profile picture' />
                 </div>
                 <Link to={`/user/${props.user.username}`} className='username'>{props.user.username}</Link>
             </div>
