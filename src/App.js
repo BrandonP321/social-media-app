@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Login from './pages/Login';
 import Profilepage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
+import Post from './pages/Post';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route exact path='/user/edit/:username'>
             <EditProfile />
+          </Route>
+          <Route exact path='/post/:id'>
+            <Post />
           </Route>
         </Switch>
       </Router>

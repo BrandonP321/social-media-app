@@ -175,7 +175,9 @@ export default function Profilepage() {
                             // get column that thumbnail will show up in (add 1 to index to start counting at 1)
                             const col = getColOfThumbnail(index + 1)
                             return (
-                                <div className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col' : ''}`}>
+                                <div 
+                                    className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col' : ''}`}
+                                    onClick={() => history.push(`/post/${post._id}`)}>
                                     <img src={post.img} alt='thumbnail of post' />
                                 </div>
                             )

@@ -22,8 +22,14 @@ export default {
     userUpdate: function(user) {
         return axios.put(`${API_ENDPOINT}/api/user/update`, user, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
     },
+    getPost: function(id) {
+        return axios.get(`${API_ENDPOINT}/api/post/${id}`, setHeaderToken())
+    },
     createPost: function(post) {
         return axios.post(`${API_ENDPOINT}/api/post/create`, post, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
+    },
+    deletePost: function(id) {
+        return axios.delete(`${API_ENDPOINT}/api/post/${id}/delete`, setHeaderToken())
     },
     getHomePagePosts: function() {
         return axios.get(`${API_ENDPOINT}/api/posts/following`, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
@@ -52,7 +58,7 @@ export default {
     }
 }
 
-// function that returns obj for header in server request with jwt
+// function that returns obj for header in api request with jwt
 function setHeaderToken() {
     // get token from storage
     const token = localStorage.getItem('accessToken')

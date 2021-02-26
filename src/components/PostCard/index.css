@@ -51,6 +51,18 @@
 .post-card > .user-info {
     width: 100%;
     display: flex;
+    position: relative;
+}
+
+.post-card > .user-info .post-delete-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    color: red;
+}
+
+.post-card > .user-info .post-delete-icon:hover {
+    cursor: pointer;
 }
 
 .post-card > .user-info > .profile-img-wrapper {

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 // import { faHomeLgAlt } from '@fortawesome/pro-solid-svg-icons'
 import { faHeart as lightHeart } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
@@ -11,7 +12,13 @@ export default function PostCard(props) {
     let history = useHistory();
 
     const [postIsLiked, setPostIsLiked] = useState(props.post.hasLiked)
+    const [userIsCreator, setUserIsCreator] = useState(false)
     const isUpdatingLikeStatus = useRef(false)
+
+    useEffect(() => {
+        // when logged in user state is updated, update state
+        setUserIsCreator(props.loggedInUser && props.loggedInUser.id === props.user._id)
+    }, [props.loggedInUser])
 
     // update status for post being liked by user when user clicks like button
     const handleLikeBtnClick = useCallback((e) => {
@@ -27,11 +34,10 @@ export default function PostCard(props) {
             API.likePost(props.post._id).
                 then(response => {
                     console.log(response)
-
                 }).
                 catch(err => {
                     console.log(err.response)
-                    if (err.response.status) {
+                    if (err.response && err.response.status) {
                         switch (err.response.status) {
                             case 500:
                                 // 500: error occurred with mongoose while updating
@@ -82,6 +88,18 @@ export default function PostCard(props) {
         }
     }, [postIsLiked])
 
+    const handlePostDelete = useCallback(() => {
+        // tell server to delete post
+        API.deletePost(props.post._id).
+            then(response => {
+                // send user back to their profile page
+                history.push(`/user/${props.loggedInUser.username}`)
+            }).
+            catch(err => {
+                console.log(err.response)
+            })
+    }, [props.loggedInUser])
+
     return (
         <div className='post-card'>
             <div className='user-info'>
@@ -89,6 +107,10 @@ export default function PostCard(props) {
                     <img src={props.user.profilePicture || 'https://i.imgur.com/dCc7ake.png'} alt='User profile picture' />
                 </div>
                 <Link to={`/user/${props.user.username}`} className='username'>{props.user.username}</Link>
+                <FontAwesomeIcon 
+                    icon={faTrashAlt} 
+                    className={`post-delete-icon${props.isPostPage && userIsCreator ? '' : ' hide'}`}
+                    onClick={handlePostDelete}/>
             </div>
             <div className='post-content'>
                 <div className='post-img-wrapper'>
