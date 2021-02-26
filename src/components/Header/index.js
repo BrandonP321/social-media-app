@@ -83,9 +83,9 @@ export default function Header(props) {
                     <Link to='/' aria-label='home' className='nav-link'>
                         <FontAwesomeIcon icon={faHomeLgAlt} />
                     </Link>
-                    <Link to='#' aria-label='messages' className='nav-link messages'>
+                    {/* <Link to='#' aria-label='messages' className='nav-link messages'>
                         <FontAwesomeIcon icon={faPaperPlane} />
-                    </Link>
+                    </Link> */}
                     <button aria-label='messages' className='nav-link' onClick={handleUserIconClick}>
                         <FontAwesomeIcon icon={faUser} />
                     </button>
