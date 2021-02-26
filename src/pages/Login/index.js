@@ -135,24 +135,27 @@ export default function Login() {
         API.createUser(userObj)
             .then(response => {
                 // get access token (jwt) and user id from response
-                const userId = response.data.id
+                const username = response.data.username
                 const token = response.headers['auth-token']
+
                 // store token in storage
                 localStorage.setItem('accessToken', token);
-
                 // redirect user to their profile page
-                history.push(`/user/${userId}`)
+                history.push(`/user/${username}`)
             })
             .catch(err => {
-                switch (err.response.status) {
-                    case 409:
-                        // 409 for email taken
-                        setSignUpHelperText('Email taken')
-                        break;
-                    case 422:
-                        // 422 for username taken
-                        setSignUpHelperText("Username taken")
-                        break;
+                console.log(err.response)
+                if (err.response && err.response.status) {
+                    switch (err.response.status) {
+                        case 409:
+                            // 409 for email taken
+                            setSignUpHelperText('Email taken')
+                            break;
+                        case 422:
+                            // 422 for username taken
+                            setSignUpHelperText("Username taken")
+                            break;
+                    }
                 }
             })
             .finally(() => {
