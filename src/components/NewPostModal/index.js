@@ -54,7 +54,7 @@ export default function NewPostModal(props) {
             .then(response => {
                 console.log(response)
                 // make request to server to add post to db
-                API.createPost({ img: response.data.url, caption: captionTextarea.current.innerText })
+                API.createPost({ img: response.data.url, caption: captionTextarea.current.value })
                     .then(response => {
                         // refresh page to load in new post
                         history.go(0)
