@@ -1,0 +1,44 @@
+.header-search-results-wrapper {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    max-height: 300px;
+    box-sizing: border-box;
+    padding: 10px 10px 0px 10px;
+    color: black;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.header-search-results-wrapper > .search-result {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.header-search-results-wrapper > .search-result > .profile-img {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.header-search-results-wrapper > .search-result > .profile-img:hover {
+    cursor: pointer;
+}
+
+.header-search-results-wrapper > .search-result > .profile-img > img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.header-search-results-wrapper > .search-result > .username {
+    margin: 0;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    align-self: flex-end;
+}
+
+.header-search-results-wrapper > .search-result > .username:hover {
+    cursor: pointer;
+}
+

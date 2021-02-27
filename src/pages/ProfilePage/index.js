@@ -1,5 +1,5 @@
 import { faGameConsoleHandheld } from '@fortawesome/pro-solid-svg-icons'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -30,8 +30,30 @@ export default function Profilepage() {
     const [showViewPostModal, setViewPostModal] = useState(false)
 
     useEffect(() => {
-        
+
     }, [])
+
+    const followUser = useCallback(() => {
+        console.log(user.id)
+        API.followUser(user.id).
+            then(response => {
+                console.log(response)
+            }).
+            catch(err => {
+                console.log(err.response)
+            })
+    }, [user.id])
+
+    const unfollowUser = useCallback(() => {
+        console.log(user.id)
+        API.unfollowUser(user.id).
+            then(response => {
+                console.log(response)
+            }).
+            catch(err => {
+                console.log(err.response)
+            })
+    }, [user.id])
 
     // function to handle info from server if user is logged in
     const handleTokenInfo = data => {
@@ -41,6 +63,7 @@ export default function Profilepage() {
         API.getUser(profilePageUsername, username)
             .then(response => {
                 const userObj = response.data
+                console.log('userobj', userObj)
 
                 // update state with user info
                 setIsFollowingUser(userObj.isFollowing || false)
@@ -60,7 +83,7 @@ export default function Profilepage() {
             .catch(err => {
                 // if any error shows up, redirect back to home page
                 history.push('/')
-            })            
+            })
 
         // check if logged in user's username matches username of current profile page
         if (username === profilePageUsername) {
@@ -105,7 +128,7 @@ export default function Profilepage() {
 
     return (
         <>
-            <NewPostModal setShow={setShowNewPostModal} show={showNewPostModal}/>
+            <NewPostModal setShow={setShowNewPostModal} show={showNewPostModal} />
             <Header handleTokenInfo={handleTokenInfo} />
             <div className='content-header-footer-offset'>
                 <div className='content-main-responsive'>
@@ -133,8 +156,8 @@ export default function Profilepage() {
                                         <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
                                         <button className='blue-btn' onClick={logout}>Logout</button></> :
                                         isFollowingUser ?
-                                            <button className='blue-btn'>Unfollow</button> :
-                                            <button className='blue-btn'>Follow</button>
+                                            <button className='blue-btn' onClick={unfollowUser}>Unfollow</button> :
+                                            <button className='blue-btn' onClick={followUser}>Follow</button>
                                     }
                                 </div>
                             </div>
@@ -148,8 +171,8 @@ export default function Profilepage() {
                                     <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
                                     <button className='blue-btn' onClick={logout}>Logout</button></> :
                                     isFollowingUser ?
-                                        <button className='blue-btn'>Unfollow</button> :
-                                        <button className='blue-btn'>Follow</button>
+                                        <button className='blue-btn' onClick={unfollowUser}>Unfollow</button> :
+                                        <button className='blue-btn' onClick={followUser}>Follow</button>
                                 }
                             </div>
                             <p className='profile-bio'>{user.bio || ''}</p>
@@ -160,9 +183,9 @@ export default function Profilepage() {
                         {currentUserIsSameAsProfile && posts.length > 0 ?
                             <div className='profile-post-thumb new-post-btn' onClick={handleNewPostBtnClick}>
                                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.75 62.75"><defs><style></style></defs><circle class="cls-1" cx="31.38" cy="31.38" r="31" /><line className="cls-2" x1="31.38" y1="20.38" x2="31.38" y2="42.37" /><line className="cls-2" x1="42.37" y1="31.38" x2="20.38" y2="31.38" /></svg>
-                            </div> : currentUserIsSameAsProfile ? 
+                            </div> : currentUserIsSameAsProfile ?
                                 // else if user is viewing their own page but has no posts, display btn to create first post
-                                <button 
+                                <button
                                     className='first-post-btn dark-btn'
                                     onClick={handleNewPostBtnClick}>
                                     Create Your First Post
@@ -175,7 +198,7 @@ export default function Profilepage() {
                             // get column that thumbnail will show up in (add 1 to index to start counting at 1)
                             const col = getColOfThumbnail(index + 1)
                             return (
-                                <div 
+                                <div
                                     className={`profile-post-thumb${col === 1 ? ' first-col' : ''}${col === 3 ? ' third-col' : ''}`}
                                     onClick={() => history.push(`/post/${post._id}`)}>
                                     <img src={post.img} alt='thumbnail of post' />

@@ -6,6 +6,7 @@ import { faHomeLgAlt, faSearch as solidSearch } from '@fortawesome/pro-solid-svg
 import { faSearch } from '@fortawesome/pro-regular-svg-icons'
 import API from '../../utils/API'
 import './index.css'
+import HeaderSearchResults from '../HeaderSearchResults'
 
 export default function Header(props) {
     let history = useHistory();
@@ -13,24 +14,13 @@ export default function Header(props) {
 
     const searchInput = useRef()
     const searchInputWrapper = useRef()
+    const searchInputAndResultsWrapper = useRef();
 
     const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false)
 
-    const handleSearchFormSubmit = (e) => {
-        e.preventDefault()
-    }
-
-    const handleUserIconClick = () => {
-        // check for jwt in local storage, indicating user is logged in
-        const token = localStorage.getItem('token')
-        // if there is a token, send user to their profile page
-        if (token) {
-            // have server validate token
-        } else {
-            // else send user to login page
-            history.push('/login')
-        }
-    }
+    const [searchResults, setSearchResults] = useState([])
+    const [showSearchResults, setShowSearchResults] = useState(false)
+    const [isGettingSearchResults, setIsGettingSearchResults] = useState(false)
 
     useEffect(() => {
         // on page load, validate that user is logged in
@@ -50,7 +40,53 @@ export default function Header(props) {
                 // if token could not be validated, send user to login page
                 history.push('/login')
             })
+
+        // create click event listener to hide results when user click off of results ele
+        document.addEventListener('click', e => {
+            const target = e.target
+
+            // if target isn't part of search bar/results, update state to hide search results
+            if (searchInputAndResultsWrapper.current && !searchInputAndResultsWrapper.current.contains(target)) {
+                setShowSearchResults(false)
+            }
+        })
     }, [])
+
+    const handleSearchFormSubmit = (e) => {
+        e.preventDefault()
+
+        const query = searchInput.current.value;
+
+        // update state to show loading spinner while getting results
+        setIsGettingSearchResults(true)
+        setShowSearchResults(true);
+
+        // get results from server
+        API.getSearchResults(query).
+            then(response => {
+                console.log(response)
+                // update state with search results
+                setSearchResults(response.data)
+            }).
+            catch(err => {
+                console.log(err.response)
+            }).
+            finally(() => {
+                setIsGettingSearchResults(false)
+            })
+    }
+
+    const handleUserIconClick = () => {
+        // check for jwt in local storage, indicating user is logged in
+        const token = localStorage.getItem('token')
+        // if there is a token, send user to their profile page
+        if (token) {
+            // have server validate token
+        } else {
+            // else send user to login page
+            history.push('/login')
+        }
+    }
 
     return (
         <header>
@@ -58,9 +94,11 @@ export default function Header(props) {
                 <div className='flex-item-group'>
                     <Link to='/' className='brand'><h1>Title</h1></Link>
                 </div>
-                <div className={`flex-item-group search${props.isLoginPage ? ' hide' : ''}`}>
+                <div 
+                    className={`flex-item-group search${props.isLoginPage ? ' hide' : ''}`}
+                    ref={searchInputAndResultsWrapper}>
                     <form ref={searchInputWrapper}
-                        className={`header-search-wrapper${isFocusedOnSearch ? ' focused' : ''}`}
+                        className={`header-search-wrapper${isFocusedOnSearch ? ' focused' : ''}${showSearchResults ? ' hide-bottom-border' : ''}`}
                         onSubmit={handleSearchFormSubmit}
                     >
                         <input ref={searchInput}
@@ -74,7 +112,10 @@ export default function Header(props) {
                             <FontAwesomeIcon icon={faSearch} />
                         </button>
                     </form>
-                    <div className='search-results-wrapper'></div>
+                    <HeaderSearchResults
+                        results={searchResults}
+                        show={showSearchResults}
+                        setShow={setShowSearchResults} />
                 </div>
                 <div className={`flex-item-group link-icons${props.isLoginPage ? ' hide' : ''}`}>
                     <Link to='#' aria-label='search' className='nav-link search'>

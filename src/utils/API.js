@@ -9,7 +9,7 @@ export default {
         return axios.put(`${API_ENDPOINT}/api/post/status/likes`, { id: postId, userLikedPost: userLikedPost })
     },
     getUser: function(profilePageUsername, visitingUser) {
-        return axios.get(`${API_ENDPOINT}/api/user/${profilePageUsername}`, { visitingUser: visitingUser })
+        return axios.get(`${API_ENDPOINT}/api/user/${profilePageUsername}`, setHeaderToken())
     },
     getUserPosts: function(id) {
         return axios.get(`${API_ENDPOINT}/api/user/${id}/posts`)
@@ -23,6 +23,12 @@ export default {
     userUpdate: function(user) {
         return axios.put(`${API_ENDPOINT}/api/user/update`, user, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
     },
+    followUser: function(userToFollowId) {
+        return axios.put(`${API_ENDPOINT}/api/user/${userToFollowId}/follow`, null, setHeaderToken())
+    },
+    unfollowUser: function(userToUnfollowId) {
+        return axios.put(`${API_ENDPOINT}/api/user/${userToUnfollowId}/unfollow`, null, setHeaderToken())
+    },
     getPost: function(id) {
         return axios.get(`${API_ENDPOINT}/api/post/${id}`, setHeaderToken())
     },
@@ -34,6 +40,9 @@ export default {
     },
     getHomePagePosts: function() {
         return axios.get(`${API_ENDPOINT}/api/posts/following`, { 'headers': { 'auth-token': localStorage.getItem('accessToken') } })
+    },
+    getSearchResults: function(query) {
+        return axios.get(`${API_ENDPOINT}/api/user/search/${query}`)
     },
     validateUserLoggedIn: async function() {
         // get jwt from local storage

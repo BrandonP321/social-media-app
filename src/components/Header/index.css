@@ -29,11 +29,20 @@ header .header-flex {
     margin: 0 auto;
 }
 
+header .flex-item-group {
+    position: relative;
+}
+
 .header-search-wrapper {
     background-color: white;
     padding: 5px 10px;
     border-radius: 20px;
     border: 1px solid #e7e8eb;
+}
+
+.header-search-wrapper.hide-bottom-border {
+    border-radius: 20px 20px 0 0;
+    border-bottom-color: white;
 }
 
 .header-search-wrapper:hover,
