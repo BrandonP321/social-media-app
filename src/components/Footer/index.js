@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faHomeLgAlt, faSearch as solidSearch } from '@fortawesome/pro-solid-svg-icons'
 import { faSearch } from '@fortawesome/pro-regular-svg-icons'
+import API from '../../utils/API'
 
 export default function Footer(props) {
     let history = useHistory();
 
+    const [loggedInUsername, setLoggedInUsername] = useState(null)
+
+    useEffect(() => {
+        // get user info by validating their jwt in storage, which returns their username
+        API.validateUserLoggedIn()
+            .then(response => {
+                const username = response.data.username
+                setLoggedInUsername(username)
+            })
+    }, [])
+
     const handleUserIconClick = () => {
-        // check for jwt in local storage, indicating user is logged in
-        const token = localStorage.getItem('token')
-        // if there is a token, send user to their profile page
-        if (token) {
-            // have server validate token
+        // if user has been validated and their username is in state, send to profile page
+        if (loggedInUsername) {
+            history.push('/user/' + loggedInUsername)
         } else {
             // else send user to login page
             history.push('/login')
