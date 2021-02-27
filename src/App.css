@@ -121,7 +121,7 @@ button:focus {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .btn-load-spinner {

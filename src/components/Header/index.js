@@ -115,7 +115,8 @@ export default function Header(props) {
                     <HeaderSearchResults
                         results={searchResults}
                         show={showSearchResults}
-                        setShow={setShowSearchResults} />
+                        setShow={setShowSearchResults}
+                        isLoading={isGettingSearchResults} />
                 </div>
                 <div className={`flex-item-group link-icons${props.isLoginPage ? ' hide' : ''}`}>
                     <Link to='#' aria-label='search' className='nav-link search'>

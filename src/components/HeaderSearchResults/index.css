@@ -42,3 +42,9 @@
     cursor: pointer;
 }
 
+.header-search-results-wrapper > .search-results-spinner {
+    display: block;
+    font-size: 3rem;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
