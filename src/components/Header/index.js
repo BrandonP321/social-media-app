@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faUser } from '@fortawesome/free-solid-svg-icons'
@@ -22,6 +22,8 @@ export default function Header(props) {
     const [showSearchResults, setShowSearchResults] = useState(false)
     const [isGettingSearchResults, setIsGettingSearchResults] = useState(false)
 
+    const [loggedInUsername, setLoggedInUsername] = useState(null)
+
     useEffect(() => {
         // on page load, validate that user is logged in
         API.validateUserLoggedIn()
@@ -34,6 +36,8 @@ export default function Header(props) {
                     if (props.handleTokenInfo) {
                         props.handleTokenInfo(response.data)
                     }
+                    // update state with user's username
+                    setLoggedInUsername(response.data.username)
                 }
             })
             .catch(err => {
@@ -76,17 +80,15 @@ export default function Header(props) {
             })
     }
 
-    const handleUserIconClick = () => {
-        // check for jwt in local storage, indicating user is logged in
-        const token = localStorage.getItem('token')
-        // if there is a token, send user to their profile page
-        if (token) {
-            // have server validate token
+    const handleUserIconClick = useCallback(() => {
+        // if user has been validated and their username is in state, send to profile page
+        if (loggedInUsername) {
+            history.push('/user/' + loggedInUsername)
         } else {
             // else send user to login page
             history.push('/login')
         }
-    }
+    }, [loggedInUsername])
 
     return (
         <header>
@@ -128,7 +130,7 @@ export default function Header(props) {
                     {/* <Link to='#' aria-label='messages' className='nav-link messages'>
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </Link> */}
-                    <button aria-label='messages' className='nav-link' onClick={handleUserIconClick}>
+                    <button aria-label='profile page' className='nav-link' onClick={handleUserIconClick}>
                         <FontAwesomeIcon icon={faUser} />
                     </button>
                 </div>
