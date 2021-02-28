@@ -1,0 +1,44 @@
+.search-page > .search-form {
+    position: relative;
+}
+
+.search-page > .search-form > input {
+
+}
+
+.search-page > .search-form > .search-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+}
+
+.search-page > .results > .results-spinner {
+    font-size: 3rem;
+    margin: 20px auto;
+    display: block;
+    animation: spin 1s linear infinite;
+}
+
+.search-page > .results > .user {
+    display: flex;
+    margin-top: 10px;
+}
+
+.search-page > .results > .user > .profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.search-page > .results > .user > .profile-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-page > .results > .user > .username {
+    margin-left: 10px;
+    align-self: flex-end;
+}

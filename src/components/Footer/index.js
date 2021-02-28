@@ -33,7 +33,7 @@ export default function Footer(props) {
 
     return (
         <footer>
-            <Link to='#' aria-label='search' className='footer-nav-link'>
+            <Link to='/search' aria-label='search' className='footer-nav-link'>
                 <FontAwesomeIcon icon={solidSearch} />
             </Link>
             <Link to='/' aria-label='home' className='footer-nav-link'>

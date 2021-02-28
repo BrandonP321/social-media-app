@@ -121,7 +121,7 @@ export default function Header(props) {
                         isLoading={isGettingSearchResults} />
                 </div>
                 <div className={`flex-item-group link-icons${props.isLoginPage ? ' hide' : ''}`}>
-                    <Link to='#' aria-label='search' className='nav-link search'>
+                    <Link to='/search' aria-label='search' className='nav-link search'>
                         <FontAwesomeIcon icon={solidSearch} />
                     </Link>
                     <Link to='/' aria-label='home' className='nav-link'>

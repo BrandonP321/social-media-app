@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Profilepage from './pages/ProfilePage';
 import EditProfile from './pages/EditProfile';
 import Post from './pages/Post';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path='/post/:id'>
             <Post />
+          </Route>
+          <Route exact path='/search'>
+            <Search />
           </Route>
         </Switch>
       </Router>
