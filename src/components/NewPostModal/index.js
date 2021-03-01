@@ -41,7 +41,6 @@ export default function NewPostModal(props) {
     }
 
     const handlePostBtnClick = useCallback(() => {
-        console.log('starting upload')
         // remove any helper text
         setHelperText('')
         // if user has not chosen an img yet, alert with helper text
@@ -49,10 +48,12 @@ export default function NewPostModal(props) {
             return setHelperText('Please choose an image to post')
         }
 
+        // disable post buttons while posting
+        setIsPosting(true);
+
         // upload image to cloudinary
         API.uploadToCloudinary(imgToPost)
             .then(response => {
-                console.log(response)
                 // make request to server to add post to db
                 API.createPost({ img: response.data.url, caption: captionTextarea.current.value })
                     .then(response => {
@@ -65,7 +66,8 @@ export default function NewPostModal(props) {
             })
             .catch(err => {
                 console.log(err.response)
-            })
+            }).
+            finally(() => setIsPosting(false))
 
     }, [imgToPost])
 
@@ -118,14 +120,6 @@ export default function NewPostModal(props) {
                             Post <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${isPosting ? '' : ' hide'}`} /></span>
                         </button>
                     </div>
-                    {/* <Image cloudName='dka83rgpq' width='700' height='393' /> */}
-                    {/* <Widget
-                    cloudName='dka83rgpq'
-                    uploadPreset='preset1'
-                    eager='w_700,h_400'
-                    buttonText={'Open'}
-                    folder='social-media-app'
-                    onFailure={() => alert('error')} /> */}
                 </div>
                 {/* this is a hidden input that will be activated through JS to get image from user's computer */}
                 <input ref={fileInput} onChange={handleImageChange} className='hide' type='file' />
