@@ -1,7 +1,10 @@
 import React, { useRef, useEffect } from 'react'
+import { useLoaction, useLocation } from 'react-router-dom'
 import './index.css'
 
 export default function PreLoader(props) {
+    let location = useLocation();
+
     const preloader = useRef()
 
     // when page is loaded, wait 2s for preloader to fade, then set it's display to none
@@ -9,7 +12,10 @@ export default function PreLoader(props) {
         if (props.show === false) {
             preloader.current.classList.add('fade')
             setTimeout(() => {
-                preloader.current.classList.add('hide')
+                // make sure there is still a perloader to change
+                if (preloader.current) {
+                    preloader.current.classList.add('hide')
+                }
             }, 2000)
         }
     }, [props.show])
