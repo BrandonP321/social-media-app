@@ -11,7 +11,7 @@ import Search from './pages/Search';
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename='/social-media-app'>
         <Switch>
           <Route exact path='/'>
             <Home />
