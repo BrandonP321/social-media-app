@@ -12,6 +12,7 @@ export default function PostCard(props) {
     let history = useHistory();
 
     const [postIsLiked, setPostIsLiked] = useState(props.post.hasLiked)
+    const [numberOfLikes, setNumberOfLikes] = useState(props.post.likedBy.length || 0)
     const [userIsCreator, setUserIsCreator] = useState(false)
     const isUpdatingLikeStatus = useRef(false)
 
@@ -31,6 +32,9 @@ export default function PostCard(props) {
 
         // if user is liking a post, notify server
         if (!postIsLiked) {
+            // increment number of likes on page
+            setNumberOfLikes(numberOfLikes + 1)
+
             API.likePost(props.post._id).
                 then(response => {
                     console.log(response)
@@ -59,12 +63,15 @@ export default function PostCard(props) {
                 })
         } else {
             // else tell server to unlike the post
+
+            // decrement number of likes on page
+            setNumberOfLikes(numberOfLikes - 1)
+
             API.unlikePost(props.post._id).
                 then(response => {
                     console.log(response)
                 }).
                 catch(err => {
-                    console.log(err.response)
                     if (err.response.status) {
                         switch (err.response.status) {
                             case 500:
@@ -86,7 +93,7 @@ export default function PostCard(props) {
                     isUpdatingLikeStatus.current = false
                 })
         }
-    }, [postIsLiked])
+    }, [postIsLiked, numberOfLikes])
 
     const handlePostDelete = useCallback(() => {
         // tell server to delete post
@@ -123,7 +130,7 @@ export default function PostCard(props) {
                             className={`heart-icon${postIsLiked ? ' liked' : ''}`}
                             onClick={() => handleLikeBtnClick(props.post.id)}
                         />
-                        <p className='likes-number'>{props.post.likes}</p>
+                        <p className='likes-number'>{numberOfLikes}</p>
                     </div>
                     <div className='caption-wrapper'>
                         {props.post.caption}
