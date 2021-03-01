@@ -89,6 +89,9 @@ export default function Login() {
             password: loginInputValues.password.value
         }
 
+        // disable login button
+        setLoadingLogin(true)
+
         API.userLogin(userObj)
             .then(response => {
                 // get access token (jwt) and user id from response
@@ -127,6 +130,9 @@ export default function Login() {
             setSignUpHelperText("Passwords must match")
             return
         }
+
+        // disable signup button
+        setLoadingSignUp(true)
 
         const userObj = {
             email: signUpInputValues.email.value,
@@ -207,7 +213,9 @@ export default function Login() {
                             <input className='dark-input' id='loginPasswordInput' type='password' onChange={handleLoginInputChange} name='password' value={loginInputValues.password.value} placeholder='Password' aria-label='password' />
                         </div>
                         <div className='submit-btn-wrapper'>
-                            <button className='blue-btn'>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingLogin ? '' : ' hide'}`} /></span></button>
+                            <button 
+                                className='blue-btn'
+                                disabled={loadingLogin}>Login <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingLogin ? '' : ' hide'}`} /></span></button>
                         </div>
                         <p className='login-display-change-text'>Don't have an account? <span onClick={toggleFormToDisplay}>Create an account</span></p>
                     </form>
@@ -232,7 +240,9 @@ export default function Login() {
                             <input className='dark-input' id='registerPasswordReEnterInput' type='password' onChange={handleSignupInputChange} name='passwordReEnter' value={signUpInputValues.passwordReEnter.value} placeholder='Re-Enter Password' aria-label='re-enter password' />
                         </div>
                         <div className='submit-btn-wrapper'>
-                            <button className='blue-btn'>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingSignUp ? '' : ' hide'}`} /></span></button>
+                            <button 
+                                className='blue-btn'
+                                disabled={loadingSignUp}>Register <span><FontAwesomeIcon icon={faSpinnerThird} className={`btn-load-spinner${loadingSignUp ? '' : ' hide'}`} /></span></button>
                         </div>
                         <p className='login-display-change-text'>Already have an account? <span onClick={toggleFormToDisplay}>Log in</span></p>
                     </form>
