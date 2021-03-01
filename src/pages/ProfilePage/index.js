@@ -240,11 +240,11 @@ export default function Profilepage() {
                                     className='first-post-btn dark-btn'
                                     onClick={handleNewPostBtnClick}>
                                     Create Your First Post
-                                </button> :
-                                // else user is viewing another's page but user has no posts
-                                <div className='no-posts-display'>
-                                    User has not posted yet
-                                </div>}
+                                </button> : posts.length === 0 ?
+                                    // else user is viewing another's page but user has no posts
+                                    <div className='no-posts-display'>
+                                        User has not posted yet
+                                </div> : ''}
                         {posts.map((post, index) => {
                             // get column that thumbnail will show up in (add 1 to index to start counting at 1)
                             const col = getColOfThumbnail(index + 1)
