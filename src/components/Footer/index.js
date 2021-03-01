@@ -24,7 +24,8 @@ export default function Footer(props) {
     const handleUserIconClick = () => {
         // if user has been validated and their username is in state, send to profile page
         if (loggedInUsername) {
-            history.push('/user/' + loggedInUsername)
+            // history.push('/user/' + loggedInUsername)
+            window.location.href = '/user/' + loggedInUsername
         } else {
             // else send user to login page
             history.push('/login')

@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 import { useHistory } from 'react-router-dom'
-// import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react'
-// import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget'
 
 export default function NewPostModal(props) {
     let history = useHistory();
