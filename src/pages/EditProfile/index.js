@@ -6,9 +6,12 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import API from '../../utils/API'
 import './index.css'
+import PreLoader from '../../components/PreLoader'
 
 export default function EditProfile() {
     let history = useHistory();
+
+    const [isPageLoaded, setIsPageLoaded] = useState(false)
 
     const { username } = useParams()
 
@@ -39,6 +42,9 @@ export default function EditProfile() {
                 // update state with new data
                 setUser({ ...response.data, profilePicture: response.data.profileImg })
                 setDisplayUsername(response.data.username)
+            }).
+            finally(() => {
+                setIsPageLoaded(true)
             })
     }, [])
 
@@ -146,6 +152,7 @@ export default function EditProfile() {
 
     return (
         <>
+            <PreLoader show={!isPageLoaded}/>
             <Header />
             <div className='content-header-footer-offset edit-profile-content-wrapper'>
                 <h1>{displayUsername}</h1>

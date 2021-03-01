@@ -1,0 +1,73 @@
+.preloader {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 30000;
+    box-sizing: border-box;
+}
+
+.preloader.fade {
+    animation: preloader-fade 2s;
+    animation-fill-mode: forwards;
+}
+
+.preloader > .loading-circles {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.preloader .circle {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #138cff;
+    opacity: 0;
+    animation: preloader-grow 2s infinite;
+}
+
+.preloader .circle.one {
+    animation-delay: 0s;
+}
+
+.preloader .circle.two {
+    animation-delay: .5s;
+}
+
+.preloader .circle.three {
+    animation-delay: 1s;
+}
+
+.preloader .circle.four {
+    animation-delay: 1.5s;
+}
+
+@keyframes preloader-grow {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(2);
+        opacity: 1;
+    }
+    100% {}
+}
+
+@keyframes preloader-fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

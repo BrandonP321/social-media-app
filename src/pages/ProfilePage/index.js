@@ -4,6 +4,7 @@ import { useHistory, useParams, Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import NewPostModal from '../../components/NewPostModal'
+import PreLoader from '../../components/PreLoader'
 import API from '../../utils/API'
 import './index.css'
 
@@ -21,6 +22,7 @@ export default function Profilepage() {
         followingCount: 0
     })
 
+    const [isPageLoaded, setIsPageLoaded] = useState(false)
     const [posts, setPosts] = useState([])
 
     const [currentUserIsSameAsProfile, setCurrentUserIsSameAsProfile] = useState(false)
@@ -28,10 +30,6 @@ export default function Profilepage() {
 
     const [showNewPostModal, setShowNewPostModal] = useState(false)
     const [showViewPostModal, setViewPostModal] = useState(false)
-
-    useEffect(() => {
-
-    }, [])
 
     const followUser = useCallback(() => {
         console.log(user.id)
@@ -84,6 +82,9 @@ export default function Profilepage() {
                 // if any error shows up, redirect back to home page
                 history.push('/')
             })
+            .finally(() => {
+                setIsPageLoaded(true)
+            })
 
         // check if logged in user's username matches username of current profile page
         if (username === profilePageUsername) {
@@ -128,6 +129,7 @@ export default function Profilepage() {
 
     return (
         <>
+            <PreLoader show={!isPageLoaded} />
             <NewPostModal setShow={setShowNewPostModal} show={showNewPostModal} />
             <Header handleTokenInfo={handleTokenInfo} />
             <div className='content-header-footer-offset'>

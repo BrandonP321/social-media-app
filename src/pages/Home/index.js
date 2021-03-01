@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import PostCard from '../../components/PostCard'
+import PreLoader from '../../components/PreLoader'
 import API from '../../utils/API'
 import './index.css'
 
 export default function Home() {
     let history = useHistory();
 
+    const [isPageLoaded, setIsPageLoaded] = useState(false)
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -30,10 +32,15 @@ export default function Home() {
             })
             .catch(err => {
                 console.log(err)
+            }).
+            finally(() => {
+                setIsPageLoaded(true)
             })
     }, [])
 
     return (
+        <>
+        <PreLoader show={!isPageLoaded}/>
         <div className='home-page-wrapper'>
             <Header />
             <div className='content-header-footer-offset'>
@@ -49,5 +56,6 @@ export default function Home() {
             </div>
             <Footer />
         </div>
+        </>
     )
 }
