@@ -1,6 +1,6 @@
 import { faGameConsoleHandheld } from '@fortawesome/pro-solid-svg-icons'
-import React, { useState, useEffect, useCallback } from 'react'
-import { useHistory, useParams, Link } from 'react-router-dom'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { useHistory, useParams, Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import Footer from '../../components/Footer'
@@ -12,8 +12,11 @@ import './index.css'
 
 export default function Profilepage() {
     let history = useHistory()
+    let location = useLocation();
 
     let { username: profilePageUsername } = useParams()
+    // ref storing username of profile visited to detect when the user is trying to visit a different profile page
+    let lastProfilePage = useRef(profilePageUsername)
 
     const [user, setUser] = useState({
         username: '',
@@ -35,7 +38,14 @@ export default function Profilepage() {
     const [isFollowingUser, setIsFollowingUser] = useState(false)
 
     const [showNewPostModal, setShowNewPostModal] = useState(false)
-    const [showViewPostModal, setViewPostModal] = useState(false)
+
+    useEffect(() => {
+        // if user is trying to visit another profile page but page won't change due to only 
+        // changing a parameter in the url, reload the page
+        if (profilePageUsername !== lastProfilePage.current) {
+            history.go(0)
+        }
+    }, [location])
 
     const followUser = useCallback(() => {
         // disable follow button

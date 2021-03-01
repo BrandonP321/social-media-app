@@ -80,24 +80,13 @@ export default function Header(props) {
             })
     }
 
-    const handleUserIconClick = useCallback(() => {
-        // if user has been validated and their username is in state, send to profile page
-        if (loggedInUsername) {
-            // history.push('/user/' + loggedInUsername)
-            window.location.href = '/user/' + loggedInUsername
-        } else {
-            // else send user to login page
-            history.push('/login')
-        }
-    }, [loggedInUsername])
-
     return (
         <header>
             <div className='header-flex'>
                 <div className='flex-item-group'>
                     <Link to='/' className='brand'><h1>Title</h1></Link>
                 </div>
-                <div 
+                <div
                     className={`flex-item-group search${props.isLoginPage ? ' hide' : ''}`}
                     ref={searchInputAndResultsWrapper}>
                     <form ref={searchInputWrapper}
@@ -131,9 +120,13 @@ export default function Header(props) {
                     {/* <Link to='#' aria-label='messages' className='nav-link messages'>
                         <FontAwesomeIcon icon={faPaperPlane} />
                     </Link> */}
-                    <button aria-label='profile page' className='nav-link' onClick={handleUserIconClick}>
+                    <Link
+                        aria-label='profile page' 
+                        className='nav-link' 
+                        // onClick={handleUserIconClick}
+                        to={loggedInUsername ? `/user/${loggedInUsername}` : '/login'}>
                         <FontAwesomeIcon icon={faUser} />
-                    </button>
+                    </Link>
                 </div>
             </div>
         </header>
