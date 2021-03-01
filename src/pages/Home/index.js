@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import PostCard from '../../components/PostCard'
@@ -41,22 +41,29 @@ export default function Home() {
 
     return (
         <>
-        <PreLoader show={!isPageLoaded}/>
-        <div className='home-page-wrapper'>
-            <Header />
-            <div className='content-header-footer-offset'>
-                <div className='content-main-responsive'>
-                    {posts.map(post => {
-                        return (
-                            <PostCard
-                                user={post.creator}
-                                post={post} />
-                        )
-                    })}
+            <PreLoader show={!isPageLoaded} />
+            <div className='home-page-wrapper'>
+                <Header />
+                <div className='content-header-footer-offset'>
+                    <div className='content-main-responsive'>
+                        {posts.map(post => {
+                            return (
+                                <PostCard
+                                    user={post.creator}
+                                    post={post} />
+                            )
+                        })}
+                        {/* if no posts, tell user to follow owners account */}
+                        {posts.length === 0 ? 
+                            <div className='new-account-msg'>
+                                <p className='heading'>No Posts</p>
+                                <p className='msg'>To view the full functionality of the app, go <Link to='/user/brandonp321'>follow the creator's account.</Link></p>
+                            </div> : ''
+                        }
+                    </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
         </>
     )
 }

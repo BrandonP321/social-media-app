@@ -1,6 +1,16 @@
-/* .feed-wrapper {
-    padding-top: 10px;
-    width: 95%;
-    max-width: 500px;
-    margin: 0 auto;
-} */
+.new-account-msg {
+    text-align: center;
+}
+
+.new-account-msg > .heading {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.new-account-msg > .msg {
+    font-size: 1.2rem;
+}
+
+.new-account-msg > .msg > a {
+    color: #138cff;
+}
