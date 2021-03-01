@@ -34,6 +34,7 @@ export default function Home() {
                 console.log(err)
             }).
             finally(() => {
+                console.log('page is loaded')
                 setIsPageLoaded(true)
             })
     }, [])

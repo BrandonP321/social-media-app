@@ -1,6 +1,8 @@
 import { faGameConsoleHandheld } from '@fortawesome/pro-solid-svg-icons'
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import NewPostModal from '../../components/NewPostModal'
@@ -23,6 +25,10 @@ export default function Profilepage() {
     })
 
     const [isPageLoaded, setIsPageLoaded] = useState(false)
+    // states indicating if user is in process of following user
+    const [isFollowing, setIsFollowing] = useState(false)
+    const [isUnfollowing, setIsUnfollowing] = useState(false)
+
     const [posts, setPosts] = useState([])
 
     const [currentUserIsSameAsProfile, setCurrentUserIsSameAsProfile] = useState(false)
@@ -32,24 +38,34 @@ export default function Profilepage() {
     const [showViewPostModal, setViewPostModal] = useState(false)
 
     const followUser = useCallback(() => {
-        console.log(user.id)
+        // disable follow button
+        setIsFollowing(true)
+
         API.followUser(user.id).
             then(response => {
-                console.log(response)
+                // reload page
+                history.go(0)
             }).
             catch(err => {
                 console.log(err.response)
-            })
+            }).
+            finally(() => setIsFollowing(false))
     }, [user.id])
 
     const unfollowUser = useCallback(() => {
-        console.log(user.id)
+        // disable unfollow button
+        setIsUnfollowing(true)
+
         API.unfollowUser(user.id).
             then(response => {
-                console.log(response)
+                // reload page
+                history.go(0)
             }).
             catch(err => {
                 console.log(err.response)
+            }).
+            finally(() => {
+                setIsUnfollowing(false)
             })
     }, [user.id])
 
@@ -158,8 +174,20 @@ export default function Profilepage() {
                                         <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
                                         <button className='blue-btn' onClick={logout}>Logout</button></> :
                                         isFollowingUser ?
-                                            <button className='blue-btn' onClick={unfollowUser}>Unfollow</button> :
-                                            <button className='blue-btn' onClick={followUser}>Follow</button>
+                                            <button
+                                                className='blue-btn'
+                                                onClick={unfollowUser}
+                                                disabled={isUnfollowing}>Unfollow <span>
+                                                    <FontAwesomeIcon
+                                                        icon={faSpinnerThird}
+                                                        className={`btn-load-spinner${isUnfollowing ? '' : ' hide'}`} /></span></button> :
+                                            <button
+                                                className='blue-btn'
+                                                onClick={followUser}
+                                                disabled={isFollowing}>Follow <span>
+                                                    <FontAwesomeIcon
+                                                        icon={faSpinnerThird}
+                                                        className={`btn-load-spinner${isFollowing ? '' : ' hide'}`} /></span></button>
                                     }
                                 </div>
                             </div>
@@ -173,8 +201,20 @@ export default function Profilepage() {
                                     <button className='blue-btn' onClick={() => history.push(`/user/edit/${user.username}`)}>Edit Profile</button>
                                     <button className='blue-btn' onClick={logout}>Logout</button></> :
                                     isFollowingUser ?
-                                        <button className='blue-btn' onClick={unfollowUser}>Unfollow</button> :
-                                        <button className='blue-btn' onClick={followUser}>Follow</button>
+                                        <button
+                                            className='blue-btn'
+                                            onClick={unfollowUser}
+                                            disabled={isUnfollowing}>Unfollow <span>
+                                                <FontAwesomeIcon
+                                                    icon={faSpinnerThird}
+                                                    className={`btn-load-spinner${isUnfollowing ? '' : ' hide'}`} /></span></button> :
+                                        <button
+                                            className='blue-btn'
+                                            onClick={followUser}
+                                            disabled={isFollowing}>Follow <span>
+                                                <FontAwesomeIcon
+                                                    icon={faSpinnerThird}
+                                                    className={`btn-load-spinner${isFollowing ? '' : ' hide'}`} /></span></button>
                                 }
                             </div>
                             <p className='profile-bio'>{user.bio || ''}</p>

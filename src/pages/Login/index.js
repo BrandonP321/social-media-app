@@ -5,9 +5,12 @@ import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons'
 import './index.css'
 import API from '../../utils/API';
 import Header from '../../components/Header'
+import PreLoader from '../../components/PreLoader'
 
 export default function Login() {
     let history = useHistory();
+
+    const [isPageLoaded, setIsPageLoaded] = useState(false)
 
     // state controls which form to display
     const [isLoggingIn, setIsLogginIn] = useState(false);
@@ -163,6 +166,10 @@ export default function Login() {
             })
     }, [signUpInputValues])
 
+    const hidePreloader = () => {
+        setIsPageLoaded(false);
+    }
+
     // functiont to make sure all input fields are filled out
     const checkForEmptyField = (inputsObj, setHelperTextFunc) => {
         // create array of all keys in state object
@@ -184,7 +191,8 @@ export default function Login() {
 
     return (
         <>
-            <Header isLoginPage={true} />
+            <PreLoader show={isPageLoaded} />
+            <Header isLoginPage={true} handleLoginInfo={hidePreloader} />
             <div>
                 <div className='login-page-forms-wrapper'>
                     <form className={`login-page-form${isLoggingIn ? '' : ' hide'}`} onSubmit={handleLoginAttempt}>

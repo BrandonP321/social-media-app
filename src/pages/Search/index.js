@@ -6,9 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faSpinnerThird } from '@fortawesome/pro-solid-svg-icons'
 import './index.css'
 import API from '../../utils/API'
+import PreLoader from '../../components/PreLoader'
 
 export default function Search() {
     let history = useHistory();
+
+    const [isPageLoaded, setIsPageLoaded] = useState(false)
 
     const [query, setQuery] = useState();
     const [isLoading, setIsLoading] = useState(false)
@@ -18,6 +21,11 @@ export default function Search() {
         // update state with new query from input element
         const value = e.target.value
         setQuery(value)
+    }
+
+    // funciton called when user log in has been verified
+    const hidePreloader = () => {
+        setIsPageLoaded(true)
     }
 
     const search = useCallback((e) => {
@@ -41,7 +49,8 @@ export default function Search() {
 
     return (
         <>
-            <Header />
+            <PreLoader show={!isPageLoaded} />
+            <Header handleTokenInfo={hidePreloader} />
             <div className='content-header-footer-offset'>
                 <div className='content-main-responsive search-page'>
                     <form className='search-form' onSubmit={search}>

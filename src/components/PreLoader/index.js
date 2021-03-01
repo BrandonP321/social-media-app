@@ -6,8 +6,8 @@ export default function PreLoader(props) {
 
     // when page is loaded, wait 2s for preloader to fade, then set it's display to none
     useEffect(() => {
-        preloader.current.classList.add('fade')
         if (props.show === false) {
+            preloader.current.classList.add('fade')
             setTimeout(() => {
                 preloader.current.classList.add('hide')
             }, 2000)
