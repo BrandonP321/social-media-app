@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/social-media-app/static/css/main.646dcf10.chunk.css",
-    "main.js": "/social-media-app/static/js/main.e14b70d1.chunk.js",
-    "main.js.map": "/social-media-app/static/js/main.e14b70d1.chunk.js.map",
-    "runtime-main.js": "/social-media-app/static/js/runtime-main.41868ea9.js",
-    "runtime-main.js.map": "/social-media-app/static/js/runtime-main.41868ea9.js.map",
+    "main.css": "/social-media-app/static/css/main.d40b0018.chunk.css",
+    "main.js": "/social-media-app/static/js/main.ccb8ecf5.chunk.js",
+    "main.js.map": "/social-media-app/static/js/main.ccb8ecf5.chunk.js.map",
+    "runtime-main.js": "/social-media-app/static/js/runtime-main.c4a61812.js",
+    "runtime-main.js.map": "/social-media-app/static/js/runtime-main.c4a61812.js.map",
     "static/js/2.ccb86e2d.chunk.js": "/social-media-app/static/js/2.ccb86e2d.chunk.js",
     "static/js/2.ccb86e2d.chunk.js.map": "/social-media-app/static/js/2.ccb86e2d.chunk.js.map",
-    "static/js/3.fb05700b.chunk.js": "/social-media-app/static/js/3.fb05700b.chunk.js",
-    "static/js/3.fb05700b.chunk.js.map": "/social-media-app/static/js/3.fb05700b.chunk.js.map",
+    "static/js/3.8a7f99e1.chunk.js": "/social-media-app/static/js/3.8a7f99e1.chunk.js",
+    "static/js/3.8a7f99e1.chunk.js.map": "/social-media-app/static/js/3.8a7f99e1.chunk.js.map",
     "index.html": "/social-media-app/index.html",
-    "static/css/main.646dcf10.chunk.css.map": "/social-media-app/static/css/main.646dcf10.chunk.css.map",
+    "static/css/main.d40b0018.chunk.css.map": "/social-media-app/static/css/main.d40b0018.chunk.css.map",
     "static/js/2.ccb86e2d.chunk.js.LICENSE.txt": "/social-media-app/static/js/2.ccb86e2d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.41868ea9.js",
+    "static/js/runtime-main.c4a61812.js",
     "static/js/2.ccb86e2d.chunk.js",
-    "static/css/main.646dcf10.chunk.css",
-    "static/js/main.e14b70d1.chunk.js"
+    "static/css/main.d40b0018.chunk.css",
+    "static/js/main.ccb8ecf5.chunk.js"
   ]
 }
