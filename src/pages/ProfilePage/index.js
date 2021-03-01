@@ -1,4 +1,3 @@
-import { faGameConsoleHandheld } from '@fortawesome/pro-solid-svg-icons'
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { useHistory, useParams, Link, useLocation } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

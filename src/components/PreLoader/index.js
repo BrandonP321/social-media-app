@@ -16,6 +16,7 @@ export default function PreLoader(props) {
 
     return (
         <div ref={preloader} className='preloader'>
+            <h2>Vorbi</h2>
             <div className='loading-circles'>
                 <div className='circle one'></div>
                 <div className='circle two'></div>

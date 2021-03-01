@@ -173,7 +173,7 @@ export default function Login() {
     }, [signUpInputValues])
 
     const hidePreloader = () => {
-        setIsPageLoaded(false);
+        setIsPageLoaded(true);
     }
 
     // functiont to make sure all input fields are filled out
@@ -197,8 +197,8 @@ export default function Login() {
 
     return (
         <>
-            <PreLoader show={isPageLoaded} />
-            <Header isLoginPage={true} handleLoginInfo={hidePreloader} />
+            <PreLoader show={!isPageLoaded} />
+            <Header isLoginPage={true} handleTokenInfo={hidePreloader} hidePreloader={hidePreloader} />
             <div>
                 <div className='login-page-forms-wrapper'>
                     <form className={`login-page-form${isLoggingIn ? '' : ' hide'}`} onSubmit={handleLoginAttempt}>

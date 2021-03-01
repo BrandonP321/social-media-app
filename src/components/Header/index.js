@@ -44,6 +44,12 @@ export default function Header(props) {
                 // if token could not be validated, send user to login page
                 history.push('/login')
             })
+            .finally(() => {
+                // regardless of wether or not user token is valid, make sure that preloader is hidden at this point
+                if (props.hidePreloader) {
+                    props.hidePreloader()
+                }
+            })
 
         // create click event listener to hide results when user click off of results ele
         document.addEventListener('click', e => {
@@ -84,7 +90,7 @@ export default function Header(props) {
         <header>
             <div className='header-flex'>
                 <div className='flex-item-group'>
-                    <Link to='/' className='brand'><h1>Title</h1></Link>
+                    <Link to='/' className='brand'><h1>Vorbi</h1></Link>
                 </div>
                 <div
                     className={`flex-item-group search${props.isLoginPage ? ' hide' : ''}`}
